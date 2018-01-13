@@ -75,7 +75,7 @@ export class LoginPage {
       this.loading.present();
     }
   }
-  
+
   ionViewDidLoad() {
     console.log("ionViewDidLoad LoginPage");
   }

@@ -7,6 +7,7 @@ import firebase from 'firebase';
 import { firebaseConfig } from './credentials';
 
 import { HomePage } from '../pages/home/home';
+import { EventListPage } from '../pages/event-list/event-list';
 import { ListPage } from '../pages/list/list';
 
 @Component({
@@ -26,7 +27,8 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Home', component: HomePage },
+      { title: 'Marketplace', component: HomePage },
+      { title: 'Your Events', component: EventListPage },
       { title: 'List', component: ListPage }
     ];
 
