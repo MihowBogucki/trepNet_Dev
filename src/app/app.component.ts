@@ -3,16 +3,21 @@ import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+import firebase from 'firebase';
+import { firebaseConfig } from './credentials';
+
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 
 @Component({
   templateUrl: 'app.html'
 })
+
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = HomePage;
+  activePage: any;
 
   pages: Array<{title: string, component: any}>;
 
@@ -25,6 +30,17 @@ export class MyApp {
       { title: 'List', component: ListPage }
     ];
 
+    firebase.initializeApp(firebaseConfig);
+
+    const unsubscribe = firebase.auth().onAuthStateChanged(user => {
+      if (!user) {
+        this.rootPage = 'LoginPage';
+        unsubscribe();
+      } else {
+        this.rootPage = HomePage;
+        unsubscribe();
+      }
+    });
   }
 
   initializeApp() {
@@ -40,5 +56,10 @@ export class MyApp {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
+    this.activePage = page;
   }
+
+  checkActive(page){
+    return page = this.activePage;
+  };
 }

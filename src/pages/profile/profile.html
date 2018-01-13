@@ -1,0 +1,93 @@
+<ion-header>
+  <ion-navbar color="primary">
+      <ion-title>Profile</ion-title>
+      <ion-buttons end>
+          <button ion-button icon-only (click)="logOut()">
+          <ion-icon name="log-out"></ion-icon>
+        </button>
+      </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+      <ion-list-header>
+          Personal Information
+      </ion-list-header>
+      <button ion-button (click)="takeSelfie()">Take a Selfie</button>
+      <button ion-button icon-only (click)="takeSelfie()">
+          Profile Picture
+          <ion-icon name="camera"></ion-icon>
+      </button>
+      <ion-item (click)="updateName()">
+          <ion-grid>
+              <ion-row>
+                  <ion-col col-6> Name *</ion-col>
+                  <ion-col col-6 *ngIf="userProfile?.firstName || userProfile?.lastName">
+                      {{userProfile?.firstName}} {{userProfile?.lastName}}
+                  </ion-col>
+                  <ion-col col-6 class="placeholder-profile" *ngIf="!userProfile?.firstName">
+                      <span> Tap here to edit. </span>
+                  </ion-col>
+              </ion-row>
+          </ion-grid>
+      </ion-item>
+      <ion-item (click)="updateEmail()">
+          <ion-grid>
+              <ion-row>
+                  <ion-col col-6> Email </ion-col>
+                  <ion-col col-6 *ngIf="userProfile?.email">
+                      {{userProfile?.email}}
+                  </ion-col>
+                  <ion-col col-6 class="placeholder-profile" *ngIf="!userProfile?.email">
+                      <span> Tap here to edit. </span>
+                  </ion-col>
+              </ion-row>
+          </ion-grid>
+      </ion-item>
+      <ion-grid>
+          <ion-row>
+              <ion-col col-6> Phone Number</ion-col>
+              <ion-col col-6>
+                  <ion-input [(ngModel)]="phoneNo" type="tel" placeholder="What's your Phone Number?" (ionChange)="updatePhoneNo(phoneNo)"></ion-input>
+              </ion-col>
+
+          </ion-row>
+      </ion-grid>
+      <ion-item>
+          <ion-label class="dob-label">Date of Birth</ion-label>
+          <ion-datetime displayFormat="MMM D, YYYY" pickerFormat="D MMM YYYY" [(ngModel)]="birthDate" (ionChange)="updateDOB(birthDate)"></ion-datetime>
+      </ion-item>
+      <!-- <ion-grid>
+          <ion-row>
+              <ion-col col-6> Address Details
+                  <ion-label class="dob-label">Address Details</ion-label>
+              </ion-col>
+              <ion-col col-6>
+                  <ion-input [(ngModel)]="phoneNo" type="text" placeholder="What's your Phone Number?" (ionChange)="updatePhoneNo(phoneNo)"></ion-input>
+              </ion-col>
+          </ion-row>
+      </ion-grid> -->
+
+      <ion-grid>
+          <ion-row>
+              <ion-col col-6> Profession</ion-col>
+              <ion-col col-6>
+                  <ion-input [(ngModel)]="profession" type="text" placeholder="What's your Profession?" (ionChange)="updateProfession(profession)"></ion-input>
+              </ion-col>
+          </ion-row>
+      </ion-grid>
+
+
+      <ion-item (click)="updatePassword()">
+          <ion-grid>
+              <ion-row>
+                  <ion-col col-6> Password </ion-col>
+                  <ion-col col-6 class="placeholder-profile">
+                      <span> Tap here to edit. </span>
+                  </ion-col>
+              </ion-row>
+          </ion-grid>
+      </ion-item>
+  </ion-list>
+</ion-content>
