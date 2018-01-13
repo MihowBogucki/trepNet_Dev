@@ -1,0 +1,8 @@
+{
+  "name": "trepNet_Dev",
+  "app_id": "40384133",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
