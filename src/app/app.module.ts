@@ -15,26 +15,26 @@ import { EventProvider } from '../providers/event/event';
 import { ProfileProvider } from '../providers/profile/profile';
 
 import {EventListPageModule} from '../pages/event-list/event-list.module';
+import {ProfilePageModule} from '../pages/profile/profile.module';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    ListPage
-
+    ListPage,
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     EventListPageModule,
+    ProfilePageModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     HomePage,
     EventListPage,
-    ListPage
-
+    ListPage,
   ],
   providers: [
     StatusBar,

@@ -29,6 +29,9 @@ export class EventListPage {
   }
   goToEventDetail(eventId):void {
     this.navCtrl.push('EventDetailPage', { eventId: eventId });
-    }
+  }
+  goToCreate(): void {
+    this.navCtrl.push("EventCreatePage");
+  }
     
 }
