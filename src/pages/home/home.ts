@@ -17,5 +17,8 @@ export class HomePage {
   goToList(): void {
     this.navCtrl.push("EventListPage");
   }
+  goToPostCreate(): void {
+    this.navCtrl.push("PostCreatePage");
+  }
   
 }

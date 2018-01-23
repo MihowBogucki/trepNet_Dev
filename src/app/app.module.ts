@@ -14,9 +14,10 @@ import { AuthProvider } from '../providers/auth/auth';
 import { EventProvider } from '../providers/event/event';
 import { ProfileProvider } from '../providers/profile/profile';
 
-import {EventListPageModule} from '../pages/event-list/event-list.module';
-import {ProfilePageModule} from '../pages/profile/profile.module';
+import { EventListPageModule} from '../pages/event-list/event-list.module';
+import { ProfilePageModule} from '../pages/profile/profile.module';
 import { PreloaderProvider } from '../providers/preloader/preloader';
+import { MarketplaceProvider } from '../providers/marketplace/marketplace';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { PreloaderProvider } from '../providers/preloader/preloader';
     EventProvider,
     ProfileProvider,
     Camera,
-    PreloaderProvider
+    PreloaderProvider,
+    MarketplaceProvider
   ]
 })
 export class AppModule {}

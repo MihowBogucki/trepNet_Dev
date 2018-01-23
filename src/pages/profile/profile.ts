@@ -24,6 +24,7 @@ export class ProfilePage {
   public birthDate: string;
   public profession: string;
   public phoneNo: string;
+  public profilePicture: string;
 
   constructor(
     public navCtrl: NavController,
@@ -39,6 +40,7 @@ export class ProfilePage {
       this.birthDate = userProfileSnapshot.val().birthDate;
       this.profession = userProfileSnapshot.val().profession;
       this.phoneNo = userProfileSnapshot.val().phoneNo;
+      this.profilePicture = userProfileSnapshot.val().profilePicture;
     });
   }
 
