@@ -17,11 +17,16 @@
       <ion-list-header>
           Personal Information
       </ion-list-header>
-      <button ion-button (click)="takeSelfie()">Take a Selfie</button>
+      <ion-item>
+      <ion-avatar item-start>
+        <img src="assets/imgs/avatar-ts-woody.png">
+      </ion-avatar>  
       <button ion-button icon-only (click)="takeSelfie()">
-          Profile Picture
-          <ion-icon name="camera"></ion-icon>
-      </button>
+        Profile Picture
+        <ion-icon name="camera"></ion-icon>
+    </button>
+      </ion-item>
+
       <ion-item (click)="updateName()">
           <ion-grid>
               <ion-row>

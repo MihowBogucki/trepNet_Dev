@@ -3,7 +3,9 @@ import {
   Alert,
   AlertController,
   IonicPage,
-  NavController
+  NavController,
+  Loading,
+  LoadingController
 } from 'ionic-angular';
 import { ProfileProvider } from '../../providers/profile/profile';
 import { AuthProvider } from '../../providers/auth/auth';
@@ -51,7 +53,7 @@ export class ProfilePage {
     this.cameraPlugin.getPicture({
       quality : 95,
       destinationType : this.cameraPlugin.DestinationType.DATA_URL,
-      sourceType : this.cameraPlugin.PictureSourceType.CAMERA,
+      sourceType : this.cameraPlugin.PictureSourceType.PHOTOLIBRARY,
       allowEdit : true,
       encodingType: this.cameraPlugin.EncodingType.PNG,
       targetWidth: 500,
@@ -59,11 +61,11 @@ export class ProfilePage {
       saveToPhotoAlbum: true
     }).then(profilePicture => {
       // Send the picture to Firebase Storage
-      const selfieRef = firebase.storage().ref('profilePictures/user1/profilePicture.png');
+      const selfieRef = firebase.storage().ref('profilePicture/profilePicture.png');
       selfieRef.putString(profilePicture, 'base64', {contentType: 'image/png'}).then(savedProfilePicture => {
         firebase
           .database()
-          .ref(`users/user1/profilePicture`)
+          .ref(`users/6UICA5yT1IWZKrzLyit0YO4kHZj2/profilePicture`)
           .set(savedProfilePicture.downloadURL);
       });
     }, error => {

@@ -16,6 +16,7 @@ import { ProfileProvider } from '../providers/profile/profile';
 
 import {EventListPageModule} from '../pages/event-list/event-list.module';
 import {ProfilePageModule} from '../pages/profile/profile.module';
+import { PreloaderProvider } from '../providers/preloader/preloader';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import {ProfilePageModule} from '../pages/profile/profile.module';
     AuthProvider,
     EventProvider,
     ProfileProvider,
-    Camera
+    Camera,
+    PreloaderProvider
   ]
 })
 export class AppModule {}
