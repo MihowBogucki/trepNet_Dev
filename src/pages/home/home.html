@@ -14,7 +14,7 @@
     </ion-navbar>
 </ion-header>
 
-<ion-content class="list-home-page">
+<ion-content class="outer-content">
   <!-- <button ion-button block color="primary" (click)="goToCreate()">
   Create a new Event
   </button>
@@ -22,19 +22,93 @@
   See your events
   </button> -->
   <ion-list>
-      <ion-list-header>Today</ion-list-header>
-      <ion-item>
+      <ion-list-header >Today</ion-list-header>
+      <ion-card>
+            <ion-card-content>
+                    <ion-item>
+                            <ion-avatar item-start>
+                                <img src="assets/imgs/avatar-ts-woody.png">
+                            </ion-avatar>
+                            <h2>Woody</h2>
+                            <h3>I need a service - Plummer</h3>
+                            <p>3:43 pm</p>
+                        </ion-item>
+              <ion-card-title>
+                Leaking tap
+              </ion-card-title>
+              <p>
+                I have an urgent request to fix my leaking tap!
+              </p>
+            </ion-card-content>
+        
+            <ion-row no-padding>
+              <ion-col>
+                <button ion-button clear small color="danger" icon-start>
+                  <ion-icon name='bookmark'></ion-icon>
+                  Pin
+                </button>
+              </ion-col>
+              <!-- <ion-col text-center>
+                <button ion-button clear small color="danger" icon-start>
+                  <ion-icon name='musical-notes'></ion-icon>
+                  Listen
+                </button>
+              </ion-col> -->
+              <ion-col text-right>
+                <button ion-button clear small color="danger" icon-start>
+                  <ion-icon name='chatboxes'></ion-icon>
+                  Offer help
+                </button>
+              </ion-col>
+            </ion-row>
+        
+          </ion-card>
+    
+          <ion-card>
+                <ion-card-content>
+                        <ion-item>
+                                <ion-avatar item-start>
+                                        <img src="assets/imgs/avatar-ts-buzz.png">
+                                </ion-avatar>
+                                <h2>Buzz Lightyear</h2>
+                                <h3>I to sell - Goods</h3>
+                                <p>10:03 am</p>
+                            </ion-item>
+                  <ion-card-title>
+                    Dell Laptops
+                  </ion-card-title>
+                  <p>
+                    I have 3 Dell Laptops I want to sell. Each for R7,500 or all 3 for R10,000.
+                  </p>
+                </ion-card-content>
+            
+                <ion-row no-padding>
+                  <ion-col>
+                    <button ion-button clear small color="danger" icon-start>
+                      <ion-icon name='bookmark'></ion-icon>
+                      Pin
+                    </button>
+                  </ion-col>
+                  <ion-col text-right>
+                    <button ion-button clear small color="danger" icon-start>
+                      <ion-icon name='chatboxes'></ion-icon>
+                      Offer help
+                    </button>
+                  </ion-col>
+                </ion-row>
+            
+              </ion-card>
+      <!-- <ion-item>
           <ion-avatar item-start>
               <img src="assets/imgs/avatar-ts-woody.png">
           </ion-avatar>
           <h2>Woody</h2>
           <h3>Service - Doctor</h3>
           <p>I need a registered Electrician to change..</p>
-          <ion-note>3:43 pm</ion-note>
-          <ion-note item-end>
-              <button ion-button outline item-end>Offer Service</button>
-          </ion-note>
-          <!-- <button ion-button outline item-end>View</button> -->
+          <p>3:43 pm</p>
+          <button ion-item>
+            {{ item }}
+          </button>
       </ion-item>
       <ion-item>
           <ion-avatar item-start>
@@ -45,7 +119,7 @@
           <p>I"m looking for a plummer to fix my tap at home.</p>
           <ion-note>10:03 am</ion-note>
           <ion-note item-end>
-                <button ion-button outline item-end>Offer Service</button>
+                <button ion-button outline item-end>Offer Help</button>
           </ion-note>
       </ion-item>
 
@@ -58,7 +132,7 @@
           <p>Well aren't you just the sweetest space toy I ever did meet!</p>
           <ion-note>09:23 am</ion-note>
           <ion-note item-end>
-                <button ion-button outline item-end>Offer Service</button>
+                <button ion-button outline item-end>Offer Help</button>
           </ion-note>
       </ion-item>
 
@@ -71,16 +145,11 @@
           <p>You're not turning me into a Mashed Potato.</p>
           <ion-note>5:47 am</ion-note>
           <ion-note item-end>
-                <button ion-button outline item-end>Offer Service</button>
+                <button ion-button outline item-end>Offer Help</button>
           </ion-note>
-      </ion-item>
+      </ion-item> -->
 
-  </ion-list>
-
-  <ion-list>
-
-      <ion-list-header>Yesterday</ion-list-header>
-
+      <ion-list-header >Yesterday</ion-list-header>
       <ion-item>
           <ion-avatar item-start>
               <img src="assets/imgs/avatar-ts-hamm.png">
@@ -90,7 +159,7 @@
           <p>You heard of Kung Fu? Well get ready for pork chop.</p>
           <ion-note>11:11 pm</ion-note>
           <ion-note item-end>
-                <button ion-button outline item-end>Offer Service</button>
+                <button ion-button outline item-end>Offer Help</button>
           </ion-note>
       </ion-item>
 
@@ -103,7 +172,7 @@
           <p>I may not be a smart dog, but I know what roadkill is.</p>
           <ion-note>8:54 pm</ion-note>
           <ion-note item-end>
-                <button ion-button outline item-end>Offer Service</button>
+                <button ion-button outline item-end>Offer Help</button>
           </ion-note>
       </ion-item>
 
@@ -116,7 +185,7 @@
           <p>Were you scared? Tell me honestly.</p>
           <ion-note>7:22 am</ion-note>
           <ion-note item-end>
-                <button ion-button outline item-end>Offer Service</button>
+                <button ion-button outline item-end>Offer Help</button>
           </ion-note>
       </ion-item>
 
@@ -129,15 +198,11 @@
           <p>Neigh!</p>
           <ion-note>2:08 am</ion-note>
           <ion-note item-end>
-                <button ion-button outline item-end>Offer Service</button>
+                <button ion-button outline item-end>Offer Help</button>
           </ion-note>
       </ion-item>
 
-  </ion-list>
-
-  <ion-list>
-
-      <ion-list-header>Last Week</ion-list-header>
+      <ion-list-header >Last Week</ion-list-header>
 
       <ion-item>
           <ion-avatar item-start>
@@ -148,7 +213,7 @@
           <p>So, who's ready for Ken's dream tour?</p>
           <ion-note >Sun</ion-note>
           <ion-note item-end>
-                <button ion-button outline item-end>Offer Service</button>
+                <button ion-button outline item-end>Offer Help</button>
           </ion-note>
       </ion-item>
 
@@ -161,7 +226,7 @@
           <p>The claw is our master.</p>
           <ion-note>Fri</ion-note>
           <ion-note item-end>
-                <button ion-button outline item-end>Offer Service</button>
+                <button ion-button outline item-end>Offer Help</button>
           </ion-note>
       </ion-item>
 
@@ -174,7 +239,7 @@
           <p>Code Red, repeat: We're at Code Red!</p>
           <ion-note>Wed</ion-note>
           <ion-note item-end>
-                <button ion-button outline item-end>Offer Service</button>
+                <button ion-button outline item-end>Offer Help</button>
           </ion-note>
       </ion-item>
 
@@ -187,10 +252,14 @@
           <p>What would you say if I get someone else to watch the sheep for me tonight?</p>
           <ion-note>Mon</ion-note>
           <ion-note item-end>
-                <button ion-button outline item-end>Offer Service</button>
+                <button ion-button outline item-end>Offer Help</button>
           </ion-note>
       </ion-item>
 
   </ion-list>
 
-</ion-content>
+ 
+    </ion-content>
+    
+
+
