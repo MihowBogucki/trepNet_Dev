@@ -10,7 +10,8 @@ import {
 import { ProfileProvider } from '../../providers/profile/profile';
 import { AuthProvider } from '../../providers/auth/auth';
 import firebase from 'firebase';
-import { Camera } from '@ionic-native/camera';
+import { storage } from 'firebase';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 
 
 @IonicPage()
@@ -50,6 +51,33 @@ export class ProfilePage {
     });
   }
 
+  async takePhoto(){
+    try{
+    const options: CameraOptions = {
+      quality : 90,
+      destinationType : this.cameraPlugin.DestinationType.DATA_URL,
+      sourceType : this.cameraPlugin.PictureSourceType.PHOTOLIBRARY,
+      allowEdit : true,
+      encodingType: this.cameraPlugin.EncodingType.JPEG,
+      targetWidth: 600,
+      targetHeight: 600,
+      mediaType: this.cameraPlugin.MediaType.PICTURE,
+      correctOrientation: true
+    }
+
+    const result = await this.cameraPlugin.getPicture(options)
+
+    const image = `data:image/jpeg;base64,${result}`;
+
+    const pictures = storage().ref('profilePictures/userPhoto');
+    pictures.putString(image, 'data_url');
+
+  }
+  catch (e){
+    console.log("Photo upload error")
+    console.error(e.messagec);
+  }
+  }
  
   takeSelfie(): void {
     this.cameraPlugin.getPicture({
@@ -57,7 +85,7 @@ export class ProfilePage {
       destinationType : this.cameraPlugin.DestinationType.DATA_URL,
       sourceType : this.cameraPlugin.PictureSourceType.PHOTOLIBRARY,
       allowEdit : true,
-      encodingType: this.cameraPlugin.EncodingType.PNG,
+      encodingType: this.cameraPlugin.EncodingType.JPEG,
       targetWidth: 500,
       targetHeight: 500,
       saveToPhotoAlbum: true

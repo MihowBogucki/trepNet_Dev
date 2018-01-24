@@ -3,6 +3,6 @@ export const firebaseConfig = {
   authDomain: "trepnet-58387.firebaseapp.com",
   databaseURL: "https://trepnet-58387.firebaseio.com",
   projectId: "trepnet-58387",
-  storageBucket: "",
+  storageBucket: "trepnet-58387.appspot.com",
   messagingSenderId: "463618823903"
   };
