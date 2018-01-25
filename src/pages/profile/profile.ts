@@ -69,13 +69,18 @@ export class ProfilePage {
 
     const image = `data:image/jpeg;base64,${result}`;
 
-    const pictures = storage().ref('profilePictures/userPhoto');
-    pictures.putString(image, 'data_url');
+    const pictures = storage().ref('userProfile/userPhoto');
+    pictures.putString(image, 'data_url').then(savedProfilePicture => {
+      firebase
+        .database()
+        .ref(`userProfile/6UICA5yT1IWZKrzLyit0YO4kHZj2/profilePicture/`)
+        .set(savedProfilePicture.downloadURL);
+ });
 
   }
   catch (e){
     console.log("Photo upload error")
-    console.error(e.messagec);
+    console.log("ERROR -> " + JSON.stringify(e.message));
   }
   }
  
@@ -92,11 +97,12 @@ export class ProfilePage {
     }).then(profilePicture => {
       // Send the picture to Firebase Storage
       const selfieRef = firebase.storage().ref('profilePicture/profilePicture.png');
-      selfieRef.putString(profilePicture, 'base64', {contentType: 'image/png'}).then(savedProfilePicture => {
-        firebase
-          .database()
-          .ref(`users/6UICA5yT1IWZKrzLyit0YO4kHZj2/profilePicture`)
-          .set(savedProfilePicture.downloadURL);
+      selfieRef.putString(profilePicture, 'base64', {contentType: 'image/png'})
+        .then(savedProfilePicture => {
+           firebase
+             .database()
+             .ref(`userProfile/`)
+             .set(savedProfilePicture.downloadURL);
       });
     }, error => {
       // Log an error to the console if something goes wrong.
