@@ -8,7 +8,7 @@ export class MarketplaceProvider {
   profilePicture: any;
 
   public marketplaceListRef: firebase.database.Reference;
-  public marketplaceListAllRef: firebase.database.Reference;
+  // public marketplaceListAllRef: firebase.database.Reference;
 
   constructor(
     public profileProvider: ProfileProvider,

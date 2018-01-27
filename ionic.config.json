@@ -1,8 +1,8 @@
 {
-  "name": "trepNet_Dev",
-  "app_id": "5275f5d3",
-  "type": "ionic-angular",
-  "integrations": {
-    "cordova": {}
-  }
+    "name": "trepNet_Dev",
+    "app_id": "5275f5d3",
+    "type": "ionic-angular",
+    "integrations": {
+        "cordova": {}
+    }
 }

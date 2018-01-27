@@ -1,18 +1,16 @@
+import { PreloaderProvider } from './../../providers/preloader/preloader';
 import { Component } from '@angular/core';
 import {
   Alert,
   AlertController,
   IonicPage,
-  NavController,
-  Loading,
-  LoadingController
+  NavController
 } from 'ionic-angular';
 import { ProfileProvider } from '../../providers/profile/profile';
 import { AuthProvider } from '../../providers/auth/auth';
 import firebase from 'firebase';
 import { storage } from 'firebase';
 import { Camera, CameraOptions } from '@ionic-native/camera';
-
 
 @IonicPage()
 @Component({
@@ -32,17 +30,26 @@ export class ProfilePage {
     public alertCtrl: AlertController,
     public authProvider: AuthProvider,
     public profileProvider: ProfileProvider,
-    public cameraPlugin: Camera
+    public cameraPlugin: Camera,
+    public preloaderProvider: PreloaderProvider
   ) { }
 
   ionViewDidLoad() {
-    this.profileProvider.getUserProfile().on('value', userProfileSnapshot => {
-      this.userProfile = userProfileSnapshot.val();
-      this.birthDate = userProfileSnapshot.val().birthDate;
-      this.profession = userProfileSnapshot.val().profession;
-      this.phoneNo = userProfileSnapshot.val().phoneNo;
-      this.profilePicture = userProfileSnapshot.val().profilePicture;
-    });
+    try {
+      this.preloaderProvider.displayPreloader();
+      this.profileProvider.getUserProfile().on('value', userProfileSnapshot => {
+        this.userProfile = userProfileSnapshot.val();
+        this.birthDate = userProfileSnapshot.val().birthDate;
+        this.profession = userProfileSnapshot.val().profession;
+        this.phoneNo = userProfileSnapshot.val().phoneNo;
+        this.profilePicture = userProfileSnapshot.val().profilePicture;
+        this.preloaderProvider.hidePreloader();
+      });
+    } catch (error) {
+      console.log("Profile data error")
+      console.log("ERROR -> " + JSON.stringify(error.message));
+    }
+    
   }
 
   logOut(): void {
