@@ -32,62 +32,41 @@
         <ion-icon name="add"></ion-icon>
         </button>
     </ion-fab>
-
-    <!-- <button ion-button block color="primary" (click)="goToCreate()">
-  Create a new Event
-  </button>
-  <button ion-button block color="primary" (click)="goToList()">
-  See your events
-  </button> -->
-    <ion-list>
+    <ion-list *ngFor="let marketPlace of marketPlaceList">
         <ion-list-header>Today</ion-list-header>
-
-        <ion-item *ngFor="let marketPlace of marketPlaceList">
-            <h2>{{marketPlace?.firstName}}</h2>
-            <p>postType: <strong>${{marketPlace?.postType}}</strong></p>
-            <p>category: <strong>{{marketPlace?.category}}</strong></p>
-        </ion-item>
-
         <ion-card>
             <ion-card-content>
-                <ion-item *ngFor="let marketPlace of marketPlaceList">
+                <ion-item>
                     <ion-avatar item-start>
                         <img src={{marketPlace.profilePicture}}>
                     </ion-avatar>
-                    <h2>{{marketPlace.firstName}}</h2>
-                    <h3>{{marketPlace.postType}} - {{marketPlace.category}}</h3>
-                    <p>{{marketPlace.date}}</p>
+                    <h2>{{marketPlace?.firstName}}</h2>
+                    <h3>{{marketPlace?.postType}} - {{marketPlace.category}}</h3>
+                    <p>{{marketPlace?.date | date: "dd-MM-yyyy HH:mm"}}</p>
                 </ion-item>
                 <ion-card-title>
-                    <!-- {{marketPlace.title}} -->
+                    {{marketPlace?.title}}
                 </ion-card-title>
-                <p>
-                    <!-- {{marketPlace.description}} -->
-                </p>
+                <p>{{marketPlace?.description}}</p>
             </ion-card-content>
-
             <ion-row no-padding>
                 <ion-col>
                     <button ion-button clear small color="danger" icon-start>
-            <ion-icon name='bookmark'></ion-icon>
-            Pin
-          </button>
+                        <ion-icon name='bookmark'></ion-icon>Pin
+                    </button>
                 </ion-col>
-                <!-- <ion-col text-center>
-                <button ion-button clear small color="danger" icon-start>
-                  <ion-icon name='musical-notes'></ion-icon>
-                  Listen
-                </button>
-              </ion-col> -->
                 <ion-col text-right>
                     <button ion-button clear small color="danger" icon-start>
-            <ion-icon name='chatboxes'></ion-icon>
-            Offer help
-          </button>
+                        <ion-icon name='chatboxes'></ion-icon>Offer help
+                    </button>
                 </ion-col>
             </ion-row>
-
         </ion-card>
+
+
+
+
+        <ion-list-header>Yesterday</ion-list-header>
 
         <ion-card>
             <ion-card-content>
@@ -110,72 +89,73 @@
             <ion-row no-padding>
                 <ion-col>
                     <button ion-button clear small color="danger" icon-start>
-            <ion-icon name='bookmark'></ion-icon>
-            Pin
-          </button>
+                <ion-icon name='bookmark'></ion-icon>
+                Pin
+              </button>
                 </ion-col>
                 <ion-col text-right>
                     <button ion-button clear small color="danger" icon-start>
-            <ion-icon name='chatboxes'></ion-icon>
-            Offer help
-          </button>
+                <ion-icon name='chatboxes'></ion-icon>
+                Offer help
+              </button>
                 </ion-col>
             </ion-row>
 
         </ion-card>
+
         <!-- <ion-item>
-          <ion-avatar item-start>
-              <img src="assets/imgs/avatar-ts-woody.png">
-          </ion-avatar>
-          <h2>Woody</h2>
-          <h3>Service - Doctor</h3>
-          <p>I need a registered Electrician to change..</p>
-          <p>3:43 pm</p>
-          <button ion-item>
-            {{ item }}
-          </button>
-      </ion-item>
-      <ion-item>
-          <ion-avatar item-start>
-              <img src="assets/imgs/avatar-ts-buzz.png">
-          </ion-avatar>
-          <h2>Buzz Lightyear</h2>
-          <h3>Service - Plummer</h3>
-          <p>I"m looking for a plummer to fix my tap at home.</p>
-          <ion-note>10:03 am</ion-note>
-          <ion-note item-end>
-                <button ion-button outline item-end>Offer Help</button>
-          </ion-note>
-      </ion-item>
+            <ion-avatar item-start>
+                <img src="assets/imgs/avatar-ts-woody.png">
+            </ion-avatar>
+            <h2>Woody</h2>
+            <h3>Service - Doctor</h3>
+            <p>I need a registered Electrician to change..</p>
+            <p>3:43 pm</p>
+            <button ion-item>
+                  {{ item }}
+                </button>
+        </ion-item> -->
 
-      <ion-item>
-          <ion-avatar item-start>
-              <img src="assets/imgs/avatar-ts-jessie.png">
-          </ion-avatar>
-          <h2>Jessie</h2>
-          <h3>Service - </h3>
-          <p>Well aren't you just the sweetest space toy I ever did meet!</p>
-          <ion-note>09:23 am</ion-note>
-          <ion-note item-end>
+        <!-- <ion-item>
+            <ion-avatar item-start>
+                <img src="assets/imgs/avatar-ts-buzz.png">
+            </ion-avatar>
+            <h2>Buzz Lightyear</h2>
+            <h3>Service - Plummer</h3>
+            <p>I"m looking for a plummer to fix my tap at home.</p>
+            <ion-note>10:03 am</ion-note>
+            <ion-note item-end>
                 <button ion-button outline item-end>Offer Help</button>
-          </ion-note>
-      </ion-item>
+            </ion-note>
+        </ion-item> -->
 
-      <ion-item>
-          <ion-avatar item-start>
-              <img src="assets/imgs/avatar-ts-potatohead.png">
-          </ion-avatar>
-          <h2>Mr. Potato Head</h2>
-          <h3>Service - Farmer</h3>
-          <p>You're not turning me into a Mashed Potato.</p>
-          <ion-note>5:47 am</ion-note>
-          <ion-note item-end>
+        <!-- <ion-item>
+            <ion-avatar item-start>
+                <img src="assets/imgs/avatar-ts-jessie.png">
+            </ion-avatar>
+            <h2>Jessie</h2>
+            <h3>Service - </h3>
+            <p>Well aren't you just the sweetest space toy I ever did meet!</p>
+            <ion-note>09:23 am</ion-note>
+            <ion-note item-end>
                 <button ion-button outline item-end>Offer Help</button>
-          </ion-note>
-      </ion-item> -->
+            </ion-note>
+        </ion-item> -->
 
-        <ion-list-header>Yesterday</ion-list-header>
-        <ion-item>
+        <!-- <ion-item>
+            <ion-avatar item-start>
+                <img src="assets/imgs/avatar-ts-potatohead.png">
+            </ion-avatar>
+            <h2>Mr. Potato Head</h2>
+            <h3>Service - Farmer</h3>
+            <p>You're not turning me into a Mashed Potato.</p>
+            <ion-note>5:47 am</ion-note>
+            <ion-note item-end>
+                <button ion-button outline item-end>Offer Help</button>
+            </ion-note>
+        </ion-item> -->
+
+        <!-- <ion-item>
             <ion-avatar item-start>
                 <img src="assets/imgs/avatar-ts-hamm.png">
             </ion-avatar>
@@ -186,9 +166,9 @@
             <ion-note item-end>
                 <button ion-button outline item-end>Offer Help</button>
             </ion-note>
-        </ion-item>
+        </ion-item> -->
 
-        <ion-item>
+        <!-- <ion-item>
             <ion-avatar item-start>
                 <img src="assets/imgs/avatar-ts-slinky.png">
             </ion-avatar>
@@ -199,9 +179,9 @@
             <ion-note item-end>
                 <button ion-button outline item-end>Offer Help</button>
             </ion-note>
-        </ion-item>
+        </ion-item> -->
 
-        <ion-item>
+        <!-- <ion-item>
             <ion-avatar item-start>
                 <img src="assets/imgs/avatar-ts-rex.png">
             </ion-avatar>
@@ -212,9 +192,9 @@
             <ion-note item-end>
                 <button ion-button outline item-end>Offer Help</button>
             </ion-note>
-        </ion-item>
+        </ion-item> -->
 
-        <ion-item>
+        <!-- <ion-item>
             <ion-avatar item-start>
                 <img src="assets/imgs/avatar-ts-bullseye.png">
             </ion-avatar>
@@ -225,11 +205,11 @@
             <ion-note item-end>
                 <button ion-button outline item-end>Offer Help</button>
             </ion-note>
-        </ion-item>
+        </ion-item> -->
 
         <ion-list-header>Last Week</ion-list-header>
 
-        <ion-item>
+        <!-- <ion-item>
             <ion-avatar item-start>
                 <img src="assets/imgs/avatar-ts-barbie.png">
             </ion-avatar>
@@ -240,9 +220,9 @@
             <ion-note item-end>
                 <button ion-button outline item-end>Offer Help</button>
             </ion-note>
-        </ion-item>
+        </ion-item> -->
 
-        <ion-item>
+        <!-- <ion-item>
             <ion-avatar item-start>
                 <img src="assets/imgs/avatar-ts-squeeze.png">
             </ion-avatar>
@@ -253,9 +233,9 @@
             <ion-note item-end>
                 <button ion-button outline item-end>Offer Help</button>
             </ion-note>
-        </ion-item>
+        </ion-item> -->
 
-        <ion-item>
+        <!-- <ion-item>
             <ion-avatar item-start>
                 <img src="assets/imgs/avatar-ts-sarge.png">
             </ion-avatar>
@@ -266,9 +246,9 @@
             <ion-note item-end>
                 <button ion-button outline item-end>Offer Help</button>
             </ion-note>
-        </ion-item>
+        </ion-item> -->
 
-        <ion-item>
+        <!-- <ion-item>
             <ion-avatar item-start>
                 <img src="assets/imgs/avatar-ts-bopeep.png">
             </ion-avatar>
@@ -279,7 +259,7 @@
             <ion-note item-end>
                 <button ion-button outline item-end>Offer Help</button>
             </ion-note>
-        </ion-item>
+        </ion-item> -->
 
     </ion-list>
 
