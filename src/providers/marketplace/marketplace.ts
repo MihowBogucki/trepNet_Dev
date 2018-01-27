@@ -1,35 +1,42 @@
 import { Injectable } from "@angular/core";
 import firebase from "firebase";
+import { ProfileProvider } from "../profile/profile";
 
 @Injectable()
 export class MarketplaceProvider {
+  firstName: string;
+  profilePicture: any;
+
   public marketplaceListRef: firebase.database.Reference;
-  constructor() {
+  public marketplaceListAllRef: firebase.database.Reference;
+
+  constructor(
+    public profileProvider: ProfileProvider,
+  ) {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.marketplaceListRef = firebase
           .database()
           .ref(`/marketplace/${user.uid}/`);
+
+          // this.marketplaceListAllRef = firebase
+          //   .database()
+          //   .ref(`/marketplace/`);
       }
     });
+    // this.profileProvider.getUserProfile().on('value', userProfileSnapshot => {
+    //   this.firstName = userProfileSnapshot.val().firstName;
+    //   this.profilePicture = userProfileSnapshot.val().profilePicture;
+    // });
   }
 
-  createPost(
-    //User Details
-    // uId: string,
-    userName: string,
-    userProfilePicture: string,
-
-    //Post Details
-    postType: string,
+  createPost(postType: string,
     category: string,
     title: string,
-    description: string
-
-  ): firebase.database.ThenableReference {
+    description: string): firebase.database.ThenableReference {
     return this.marketplaceListRef.push({
-      userName: userName,
-      userProfilePicture: userProfilePicture,
+      firstName: this.firstName,
+      profilePicture: this.profilePicture,
       postType: postType,
       category: category,
       title: title,
@@ -39,6 +46,10 @@ export class MarketplaceProvider {
   }
 
   getmarketplaceList(): firebase.database.Reference {
+    return this.marketplaceListRef;
+  }
+
+  getmarketplaceListAll(): firebase.database.Reference {
     return this.marketplaceListRef;
   }
 

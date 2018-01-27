@@ -19,11 +19,6 @@ export class PostCreatePage {
   }
   createPost(
 
-    //User Details
-   // uId: string,
-    userName: string,
-    userProfilePicture: string,
-
     //Post Details
     postType: string,
     category: string,
@@ -32,7 +27,7 @@ export class PostCreatePage {
 
   ): void {
     this.marketplace
-      .createPost(userName, userProfilePicture, postType, category, title, description)
+      .createPost(postType, category, title, description)
       .then(newEvent => {
         this.navCtrl.pop();
       });
