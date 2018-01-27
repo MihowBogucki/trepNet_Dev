@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { LoadingController } from 'ionic-angular';
-import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 /*

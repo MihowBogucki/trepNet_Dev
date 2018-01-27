@@ -8,40 +8,45 @@ export class MarketplaceProvider {
   profilePicture: any;
 
   public marketplaceListRef: firebase.database.Reference;
-  // public marketplaceListAllRef: firebase.database.Reference;
+   public marketplaceListAllRef: firebase.database.Reference;
 
   constructor(
     public profileProvider: ProfileProvider,
   ) {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        this.marketplaceListRef = firebase
-          .database()
-          .ref(`/marketplace/${user.uid}/`);
+        const rootRef = firebase.database().ref();
 
-          // this.marketplaceListAllRef = firebase
-          //   .database()
-          //   .ref(`/marketplace/`);
+        this.marketplaceListRef = rootRef
+                                  .child(`/marketplace/${user.uid}/`)
+                                  ;
+
+          this.marketplaceListAllRef = firebase
+            .database()
+            .ref(`/marketplace/`);
+
+          this.profileProvider.getUserProfile().on('value', userProfileSnapshot => {
+            this.firstName = userProfileSnapshot.val().firstName;
+            this.profilePicture = userProfileSnapshot.val().profilePicture;
+          });
       }
     });
-    // this.profileProvider.getUserProfile().on('value', userProfileSnapshot => {
-    //   this.firstName = userProfileSnapshot.val().firstName;
-    //   this.profilePicture = userProfileSnapshot.val().profilePicture;
-    // });
+    
   }
 
   createPost(postType: string,
     category: string,
     title: string,
     description: string): firebase.database.ThenableReference {
-    return this.marketplaceListRef.push({
+    return this.marketplaceListAllRef.push({
       firstName: this.firstName,
       profilePicture: this.profilePicture,
       postType: postType,
       category: category,
       title: title,
       description: description,
-      date: Date.now()
+      date: firebase.database.ServerValue.TIMESTAMP,
+      uId: firebase.auth().currentUser.uid
     });
   }
 

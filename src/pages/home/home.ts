@@ -33,15 +33,12 @@ export class HomePage {
                 description: snap.val().description,
                 date: snap.val().date
               });
-              this.preloaderProvider.hidePreloader();
-
               return false;
             });
+            this.preloaderProvider.hidePreloader();
           });
         } catch (error) {
           this.preloaderProvider.hidePreloader();
-
-
           console.log(error.message);
         }
       }
