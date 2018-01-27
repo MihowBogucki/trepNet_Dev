@@ -3,7 +3,7 @@ import firebase from 'firebase';
 
 @Injectable()
 export class AuthProvider {
-  constructor() {}
+  constructor() { }
 
   loginUser(email: string, password: string): Promise<firebase.User> {
     return firebase.auth().signInWithEmailAndPassword(email, password);

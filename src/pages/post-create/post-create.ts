@@ -9,26 +9,34 @@ import { MarketplaceProvider } from "../../providers/marketplace/marketplace"
 })
 export class PostCreatePage {
 
-  constructor(public navCtrl: NavController, 
-              public navParams: NavParams, 
-              public marketplace: MarketplaceProvider) {
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    public marketplace: MarketplaceProvider) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PostCreatePage');
   }
   createPost(
+
+    //User Details
+   // uId: string,
+    userName: string,
+    userProfilePicture: string,
+
+    //Post Details
     postType: string,
     category: string,
     title: string,
     description: string,
-    ): void {
+
+  ): void {
     this.marketplace
-    .createPost(postType, category, title, description)
-    .then(newEvent => {
-    this.navCtrl.pop();
-    });
-    }
+      .createPost(userName, userProfilePicture, postType, category, title, description)
+      .then(newEvent => {
+        this.navCtrl.pop();
+      });
+  }
 
 }
 

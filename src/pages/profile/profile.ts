@@ -33,7 +33,7 @@ export class ProfilePage {
     public authProvider: AuthProvider,
     public profileProvider: ProfileProvider,
     public cameraPlugin: Camera
-  ) {}
+  ) { }
 
   ionViewDidLoad() {
     this.profileProvider.getUserProfile().on('value', userProfileSnapshot => {
@@ -51,45 +51,45 @@ export class ProfilePage {
     });
   }
 
-  async takePhoto(){
-    try{
-    const options: CameraOptions = {
-      quality : 90,
-      destinationType : this.cameraPlugin.DestinationType.DATA_URL,
-      sourceType : this.cameraPlugin.PictureSourceType.PHOTOLIBRARY,
-      allowEdit : true,
-      encodingType: this.cameraPlugin.EncodingType.JPEG,
-      targetWidth: 600,
-      targetHeight: 600,
-      mediaType: this.cameraPlugin.MediaType.PICTURE,
-      correctOrientation: true
+  async takePhoto() {
+    try {
+      const options: CameraOptions = {
+        quality: 90,
+        destinationType: this.cameraPlugin.DestinationType.DATA_URL,
+        sourceType: this.cameraPlugin.PictureSourceType.PHOTOLIBRARY,
+        allowEdit: true,
+        encodingType: this.cameraPlugin.EncodingType.JPEG,
+        targetWidth: 600,
+        targetHeight: 600,
+        mediaType: this.cameraPlugin.MediaType.PICTURE,
+        correctOrientation: true
+      }
+
+      const result = await this.cameraPlugin.getPicture(options)
+
+      const image = `data:image/jpeg;base64,${result}`;
+
+      const pictures = storage().ref('userProfile/userPhoto');
+      pictures.putString(image, 'data_url').then(savedProfilePicture => {
+        firebase
+          .database()
+          .ref(`userProfile/6UICA5yT1IWZKrzLyit0YO4kHZj2/profilePicture/`)
+          .set(savedProfilePicture.downloadURL);
+      });
+
     }
-
-    const result = await this.cameraPlugin.getPicture(options)
-
-    const image = `data:image/jpeg;base64,${result}`;
-
-    const pictures = storage().ref('userProfile/userPhoto');
-    pictures.putString(image, 'data_url').then(savedProfilePicture => {
-      firebase
-        .database()
-        .ref(`userProfile/6UICA5yT1IWZKrzLyit0YO4kHZj2/profilePicture/`)
-        .set(savedProfilePicture.downloadURL);
- });
-
+    catch (e) {
+      console.log("Photo upload error")
+      console.log("ERROR -> " + JSON.stringify(e.message));
+    }
   }
-  catch (e){
-    console.log("Photo upload error")
-    console.log("ERROR -> " + JSON.stringify(e.message));
-  }
-  }
- 
+
   takeSelfie(): void {
     this.cameraPlugin.getPicture({
-      quality : 95,
-      destinationType : this.cameraPlugin.DestinationType.DATA_URL,
-      sourceType : this.cameraPlugin.PictureSourceType.PHOTOLIBRARY,
-      allowEdit : true,
+      quality: 95,
+      destinationType: this.cameraPlugin.DestinationType.DATA_URL,
+      sourceType: this.cameraPlugin.PictureSourceType.PHOTOLIBRARY,
+      allowEdit: true,
       encodingType: this.cameraPlugin.EncodingType.JPEG,
       targetWidth: 500,
       targetHeight: 500,
@@ -97,13 +97,13 @@ export class ProfilePage {
     }).then(profilePicture => {
       // Send the picture to Firebase Storage
       const selfieRef = firebase.storage().ref('profilePicture/profilePicture.png');
-      selfieRef.putString(profilePicture, 'base64', {contentType: 'image/png'})
+      selfieRef.putString(profilePicture, 'base64', { contentType: 'image/png' })
         .then(savedProfilePicture => {
-           firebase
-             .database()
-             .ref(`userProfile/`)
-             .set(savedProfilePicture.downloadURL);
-      });
+          firebase
+            .database()
+            .ref(`userProfile/`)
+            .set(savedProfilePicture.downloadURL);
+        });
     }, error => {
       // Log an error to the console if something goes wrong.
       console.log("ERROR -> " + JSON.stringify(error));
@@ -146,7 +146,7 @@ export class ProfilePage {
     this.profileProvider.updateProfession(profession);
   }
 
-  updatePhoneNo(phoneNo:string): void {
+  updatePhoneNo(phoneNo: string): void {
     this.profileProvider.updatePhoneNo(phoneNo);
   }
 

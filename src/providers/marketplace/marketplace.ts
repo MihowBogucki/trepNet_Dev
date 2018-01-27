@@ -15,16 +15,26 @@ export class MarketplaceProvider {
   }
 
   createPost(
+    //User Details
+    // uId: string,
+    userName: string,
+    userProfilePicture: string,
+
+    //Post Details
     postType: string,
     category: string,
     title: string,
-    description: string,
+    description: string
+
   ): firebase.database.ThenableReference {
     return this.marketplaceListRef.push({
+      userName: userName,
+      userProfilePicture: userProfilePicture,
       postType: postType,
       category: category,
       title: title,
-      description: description
+      description: description,
+      date: Date.now()
     });
   }
 

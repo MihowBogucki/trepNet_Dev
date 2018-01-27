@@ -12,29 +12,26 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class PreloaderProvider {
 
-   private loading : any;
+  private loading: any;
 
-   constructor( public http        : Http,
-                public loadingCtrl : LoadingController)
-   {
-   }
-
-
-
-   displayPreloader() : void
-   {
-      this.loading = this.loadingCtrl.create({
-         content: 'Please wait...'
-      });
-
-      this.loading.present();
-   }
+  constructor(public http: Http,
+    public loadingCtrl: LoadingController) {
+  }
 
 
 
-   hidePreloader() : void
-   {
-      this.loading.dismiss();
-   }
+  displayPreloader(): void {
+    this.loading = this.loadingCtrl.create({
+      content: 'Please wait...'
+    });
+
+    this.loading.present();
+  }
+
+
+
+  hidePreloader(): void {
+    this.loading.dismiss();
+  }
 
 }

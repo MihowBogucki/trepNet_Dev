@@ -5,4 +5,4 @@ export const firebaseConfig = {
   projectId: "trepnet-58387",
   storageBucket: "trepnet-58387.appspot.com",
   messagingSenderId: "463618823903"
-  };
+};
