@@ -11,8 +11,8 @@ export class EventListPage {
   constructor(
     public navCtrl: NavController,
     public eventProvider: EventProvider
-  ) {}
-
+  ) { }
+  
   ionViewDidLoad() {
     this.eventProvider.getEventList().on("value", eventListSnapshot => {
       this.eventList = [];
@@ -33,5 +33,5 @@ export class EventListPage {
   goToCreate(): void {
     this.navCtrl.push("EventCreatePage");
   }
-    
+  
 }
