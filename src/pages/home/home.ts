@@ -1,6 +1,6 @@
 import { PreloaderProvider } from './../../providers/preloader/preloader';
-import { Component } from "@angular/core";
-import { NavController } from "ionic-angular";
+import { Component, ViewChild } from "@angular/core";
+import { NavController, Content } from "ionic-angular";
 import { MarketplaceProvider } from "../../providers/marketplace/marketplace";
 import firebase from "firebase";
 
@@ -8,13 +8,22 @@ import firebase from "firebase";
   selector: "page-home",
   templateUrl: "home.html"
 })
+
 export class HomePage {
+  public items: any[] = [];
+  @ViewChild(Content) content: Content
   public marketPlaceList: Array<any>;
 
   constructor(public navCtrl: NavController,
               public marketplaceProvider: MarketplaceProvider,
               public preloaderProvider: PreloaderProvider
             ) {
+              setTimeout(() => {
+                for (let i = 0; i < 100; i++) {
+                  this.items[i] = i
+                }
+              }, 300)
+
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         try {
@@ -43,6 +52,10 @@ export class HomePage {
         }
       }
     });
+  }
+
+  callFunction(){
+    this.content.scrollToBottom(0)
   }
 
   ionViewDidLoad() {

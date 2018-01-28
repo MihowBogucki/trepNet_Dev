@@ -32,8 +32,10 @@
       <ion-icon name="add"></ion-icon>
     </button>
     </ion-fab>
-    <ion-list *ngFor="let marketPlace of marketPlaceList">
+    <ion-list *ngFor="let marketPlace of marketPlaceList; let last = last">
         <!-- <ion-list-header>Today</ion-list-header> -->
+        {{last ? callFunction() : ''}}
+
         <ion-card>
             <ion-card-content>
                 <ion-item>
