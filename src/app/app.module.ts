@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { Camera } from '@ionic-native/camera';
+import { Pro } from '@ionic/pro';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -18,6 +19,10 @@ import { EventListPageModule} from '../pages/event-list/event-list.module';
 import { ProfilePageModule} from '../pages/profile/profile.module';
 import { PreloaderProvider } from '../providers/preloader/preloader';
 import { MarketplaceProvider } from '../providers/marketplace/marketplace';
+
+const IonicPro = Pro.init('5275f5d3', {
+  appVersion: "0.0.1"
+});
 
 @NgModule({
   declarations: [
