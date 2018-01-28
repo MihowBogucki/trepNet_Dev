@@ -1,10 +1,10 @@
 import { PreloaderProvider } from './../../providers/preloader/preloader';
 import { Component } from '@angular/core';
 import {
-  Alert,
-  AlertController,
-  IonicPage,
-  NavController
+          Alert,
+          AlertController,
+          IonicPage,
+          NavController
 } from 'ionic-angular';
 import { ProfileProvider } from '../../providers/profile/profile';
 import { AuthProvider } from '../../providers/auth/auth';
@@ -35,6 +35,7 @@ export class ProfilePage {
   ) { }
 
   ionViewDidLoad() {
+
     try {
       this.preloaderProvider.displayPreloader();
       this.profileProvider.getUserProfile().on('value', userProfileSnapshot => {
@@ -51,13 +52,7 @@ export class ProfilePage {
     }
     
   }
-
-  logOut(): void {
-    this.authProvider.logoutUser().then(() => {
-      this.navCtrl.setRoot('LoginPage');
-    });
-  }
-
+  
   async takePhoto() {
     try {
       const options: CameraOptions = {
@@ -76,11 +71,11 @@ export class ProfilePage {
 
       const image = `data:image/jpeg;base64,${result}`;
 
-      const pictures = storage().ref('userProfile/userPhoto');
+      const pictures = storage().ref(`userProfile/${this.profileProvider.currentUser.uid}/userPhoto`);
       pictures.putString(image, 'data_url').then(savedProfilePicture => {
         firebase
           .database()
-          .ref(`userProfile/6UICA5yT1IWZKrzLyit0YO4kHZj2/profilePicture/`)
+          .ref(`userProfile/${this.profileProvider.currentUser.uid}/profilePicture/`)
           .set(savedProfilePicture.downloadURL);
       });
 
@@ -91,29 +86,9 @@ export class ProfilePage {
     }
   }
 
-  takeSelfie(): void {
-    this.cameraPlugin.getPicture({
-      quality: 95,
-      destinationType: this.cameraPlugin.DestinationType.DATA_URL,
-      sourceType: this.cameraPlugin.PictureSourceType.PHOTOLIBRARY,
-      allowEdit: true,
-      encodingType: this.cameraPlugin.EncodingType.JPEG,
-      targetWidth: 500,
-      targetHeight: 500,
-      saveToPhotoAlbum: true
-    }).then(profilePicture => {
-      // Send the picture to Firebase Storage
-      const selfieRef = firebase.storage().ref('profilePicture/profilePicture.png');
-      selfieRef.putString(profilePicture, 'base64', { contentType: 'image/png' })
-        .then(savedProfilePicture => {
-          firebase
-            .database()
-            .ref(`userProfile/`)
-            .set(savedProfilePicture.downloadURL);
-        });
-    }, error => {
-      // Log an error to the console if something goes wrong.
-      console.log("ERROR -> " + JSON.stringify(error));
+  logOut(): void {
+    this.authProvider.logoutUser().then(() => {
+      this.navCtrl.setRoot('LoginPage');
     });
   }
 

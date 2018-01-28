@@ -7,31 +7,27 @@ export class MarketplaceProvider {
   firstName: string;
   profilePicture: any;
 
-  public marketplaceListRef: firebase.database.Reference;
-   public marketplaceListAllRef: firebase.database.Reference;
+  public marketplaceListUserRef: firebase.database.Reference;
+  public marketplaceListAllRef: firebase.database.Reference;
 
   constructor(
     public profileProvider: ProfileProvider,
   ) {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        const rootRef = firebase.database().ref();
+        const rootRef = firebase.database().ref(`/marketplace/`);;
 
-        this.marketplaceListRef = rootRef
-                                  .child(`/marketplace/${user.uid}/`)
-                                  ;
+        this.marketplaceListUserRef = rootRef.child(`/${user.uid}/`);
 
-          this.marketplaceListAllRef = firebase
-            .database()
-            .ref(`/marketplace/`);
+        this.marketplaceListAllRef = rootRef;
 
-          this.profileProvider.getUserProfile().on('value', userProfileSnapshot => {
-            this.firstName = userProfileSnapshot.val().firstName;
-            this.profilePicture = userProfileSnapshot.val().profilePicture;
-          });
+        this.profileProvider.getUserProfile().on('value', userProfileSnapshot => {
+          this.firstName = userProfileSnapshot.val().firstName;
+          this.profilePicture = userProfileSnapshot.val().profilePicture;
+        });
       }
     });
-    
+
   }
 
   createPost(postType: string,
@@ -51,15 +47,15 @@ export class MarketplaceProvider {
   }
 
   getmarketplaceList(): firebase.database.Reference {
-    return this.marketplaceListRef;
+    return this.marketplaceListUserRef;
   }
 
   getmarketplaceListAll(): firebase.database.Reference {
-    return this.marketplaceListRef;
+    return this.marketplaceListAllRef;
   }
 
   getmarketplaceDetail(marketplaceId: string): firebase.database.Reference {
-    return this.marketplaceListRef.child(marketplaceId);
+    return this.marketplaceListAllRef.child(marketplaceId);
   }
 
 }
