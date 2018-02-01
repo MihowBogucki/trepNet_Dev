@@ -12,6 +12,8 @@ export class EventListPage {
   public eventList: Array<any>;
   @ViewChild('content') content: Content;
   user2: any;
+  displayName: any;
+  photoURLUser2: any;
   newmessage;
   allmessages = [];
   photoURL;
@@ -22,7 +24,12 @@ export class EventListPage {
     public events: Events,
     public zone: NgZone
   ) { 
-    this.photoURL = firebase.auth().currentUser.photoURL;
+    //this.photoURL = firebase.auth().currentUser.photoURL;
+    this.photoURL = "https://firebasestorage.googleapis.com/v0/b/trepnet-58387.appspot.com/o/userProfile%2F6UICA5yT1IWZKrzLyit0YO4kHZj2%2FuserPhoto?alt=media&token=059253f0-e18b-4701-a9c7-127ad7c8cc21";
+    //this.user2 = this.eventProvider.user2;
+    this.displayName = "Test user";
+    this.photoURLUser2 = "https://firebasestorage.googleapis.com/v0/b/trepnet-58387.appspot.com/o/userProfile%2FXVeqVcrUsRgfcoRGlrIKKO43Px23%2FuserPhoto?alt=media&token=ed81a278-63ab-43d2-b4a8-0d233dce77db";
+   
     this.scrollto();
     this.events.subscribe('newmessage', () => {
       this.allmessages = [];
@@ -45,6 +52,13 @@ export class EventListPage {
     setTimeout(() => {
       this.content.scrollToBottom();
     }, 1000);
+  }
+
+  addmessage() {
+    this.eventProvider.addnewmessage(this.newmessage).then(() => {
+      this.content.scrollToBottom();
+      this.newmessage = '';
+    })
   }
 
   ionViewDidLoad() {

@@ -29,7 +29,7 @@
 <ion-header>
 
     <ion-navbar color="hcolor">
-        <ion-title>DisplayName</ion-title>
+        <ion-title>{{displayName}}</ion-title>
         <ion-buttons end>
             <button ion-button (click)="sendPicMsg()">
         <ion-icon name="camera"></ion-icon>
@@ -44,18 +44,23 @@
     <div class="chatwindow">
         <ion-list no-lines>
             <ion-item *ngFor="let item of allmessages; let i = index" text-wrap>
-                <ion-avatar item-left *ngIf="item.sentby === null">
-                    <img src="{{buddy.photoURL}}">
+                <!-- <ion-avatar item-left *ngIf="item.sentby === null"> -->
+                <ion-avatar item-left>
+                    <img src="{{photoURLUser2}}">
                 </ion-avatar>
-                <div class="bubble me" *ngIf="item.sentby === null">
+                <!-- <div class="bubble me" *ngIf="item.sentby === null"> -->
+                <div class="bubble me">
                     <h3 *ngIf="!imgornot[i]">{{item.message}}</h3>
                     <img src="{{item.message}}" *ngIf="imgornot[i]">
                 </div>
-                <ion-avatar item-right *ngIf="item.sentby != null">
+                <!-- <ion-avatar item-right *ngIf="item.sentby != null"> -->
+                <ion-avatar item-right>
                     <img src="{{photoURL}}">
                 </ion-avatar>
-                <div class="bubble you" *ngIf="item.sentby != null">
-                    <h3 *ngIf="!imgornot[i]">{{item.message}}</h3>
+                <!-- <div class="bubble you" *ngIf="item.sentby != null"> -->
+                <div class="bubble you">
+                    <!-- <h3 *ngIf="!imgornot[i]">{{item.message}}</h3> -->
+                    <h3>{{item.message}}</h3>
                     <img src="{{item.message}}" *ngIf="imgornot[i]">
                 </div>
             </ion-item>

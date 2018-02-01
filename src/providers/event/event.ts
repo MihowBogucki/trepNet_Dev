@@ -10,7 +10,8 @@ export class EventProvider {
   constructor(public events: Events) {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        this.eventListRef = firebase.database().ref(`/userProfile/${user.uid}/marketplaceChat`);
+        //this.eventListRef = firebase.database().ref(`/userProfile/${user.uid}/marketplaceChat`);
+        this.eventListRef = firebase.database().ref(`/marketplaceChat/`);
       }
     });
   }
@@ -19,7 +20,7 @@ export class EventProvider {
   //   this.user2 = user2;
   // }
   initializeuser2(user2) {
-    this.user2 = "kuN6b8asK4XtUTEsiqyeSfKStGC2";
+    this.user2.uId = "kuN6b8asK4XtUTEsiqyeSfKStGC2";
   }
 
   createEvent(
@@ -39,9 +40,7 @@ export class EventProvider {
 
   getEventList() {
     let temp;
-    this.user2 = "kuN6b8asK4XtUTEsiqyeSfKStGC2";
-    console.log(this.eventListRef.child(firebase.auth().currentUser.uid));
-    console.log(this.eventListRef.child(firebase.auth().currentUser.uid).child(this.user2));
+    this.user2 = "XVeqVcrUsRgfcoRGlrIKKO43Px23";
     this.eventListRef.child(firebase.auth().currentUser.uid).child(this.user2).on('value', (snapshot) => {
       this.messages = [];
       temp = snapshot.val();
@@ -50,6 +49,30 @@ export class EventProvider {
       }
       this.events.publish('newmessage');
     })
+  }
+
+  addnewmessage(msg) {
+    if (this.user2) {
+      var promise = new Promise((resolve, reject) => {
+        this.eventListRef.child(firebase.auth().currentUser.uid).child(this.user2).push({
+          sentby: firebase.auth().currentUser.uid,
+          message: msg,
+          timestamp: firebase.database.ServerValue.TIMESTAMP
+        }).then(() => {
+          this.eventListRef.child(this.user2).child(firebase.auth().currentUser.uid).push({
+            sentby: firebase.auth().currentUser.uid,
+            message: msg,
+            timestamp: firebase.database.ServerValue.TIMESTAMP
+          }).then(() => {
+            resolve(true);
+            })
+          //   .catch((err) => {
+          //     reject(err);
+          // })
+        })
+      })
+      return promise;
+    }
   }
 
 // getbuddymessages() {
