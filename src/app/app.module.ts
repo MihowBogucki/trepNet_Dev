@@ -20,6 +20,7 @@ import { ProfilePageModule} from '../pages/profile/profile.module';
 import { PreloaderProvider } from '../providers/preloader/preloader';
 import { MarketplaceProvider } from '../providers/marketplace/marketplace';
 
+
 const IonicPro = Pro.init('5275f5d3', {
   appVersion: "0.0.1"
 });
@@ -55,7 +56,7 @@ export class MyErrorHandler implements ErrorHandler {
     BrowserModule,
     IonicModule.forRoot(MyApp),
     EventListPageModule,
-    ProfilePageModule,
+    ProfilePageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

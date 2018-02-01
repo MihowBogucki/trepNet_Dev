@@ -1,20 +1,74 @@
 <ion-header>
-  <ion-navbar>
+    <ion-navbar>
         <button ion-button menuToggle>
                 <ion-icon name="menu"></ion-icon>
               </button>
-      <ion-title>EventList</ion-title>
-  </ion-navbar>
+        <ion-title>Messages</ion-title>
+    </ion-navbar>
 </ion-header>
-<ion-content padding>
-        <button ion-button block color="primary" (click)="goToCreate()">
+<!-- <ion-content padding>
+    <button ion-button block color="primary" (click)="goToCreate()">
                 Create New Service Request
         </button>
-  <ion-list>
-      <ion-item *ngFor="let event of eventList" (click)="goToEventDetail(event.id)">
-          <h2>{{event?.name}}</h2>
-          <p>Ticket: <strong>${{event?.price}}</strong></p>
-          <p>Date: <strong>{{event?.date}}</strong></p>
-      </ion-item>
-  </ion-list>
+    <ion-list>
+        <ion-item *ngFor="let event of eventList" (click)="goToEventDetail(event.id)">
+            <h2>{{event?.name}}</h2>
+            <p>Ticket: <strong>${{event?.price}}</strong></p>
+            <p>Date: <strong>{{event?.date}}</strong></p>
+        </ion-item>
+    </ion-list>
+</ion-content> -->
+
+
+<!--
+  Generated template for the BuddychatPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar color="hcolor">
+        <ion-title>DisplayName</ion-title>
+        <ion-buttons end>
+            <button ion-button (click)="sendPicMsg()">
+        <ion-icon name="camera"></ion-icon>
+        </button>
+        </ion-buttons>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content #content>
+    <div class="chatwindow">
+        <ion-list no-lines>
+            <ion-item *ngFor="let item of allmessages; let i = index" text-wrap>
+                <ion-avatar item-left *ngIf="item.sentby === null">
+                    <img src="{{buddy.photoURL}}">
+                </ion-avatar>
+                <div class="bubble me" *ngIf="item.sentby === null">
+                    <h3 *ngIf="!imgornot[i]">{{item.message}}</h3>
+                    <img src="{{item.message}}" *ngIf="imgornot[i]">
+                </div>
+                <ion-avatar item-right *ngIf="item.sentby != null">
+                    <img src="{{photoURL}}">
+                </ion-avatar>
+                <div class="bubble you" *ngIf="item.sentby != null">
+                    <h3 *ngIf="!imgornot[i]">{{item.message}}</h3>
+                    <img src="{{item.message}}" *ngIf="imgornot[i]">
+                </div>
+            </ion-item>
+        </ion-list>
+    </div>
 </ion-content>
+<ion-footer ion-fixed>
+    <ion-toolbar class="no-border" color="white">
+        <ion-input [(ngModel)]="newmessage" placeholder="Write your message ..."></ion-input>
+        <ion-buttons end>
+            <button ion-button (click)="addmessage()">
+          <ion-icon name="send" color="primary"></ion-icon>
+        </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-footer>
