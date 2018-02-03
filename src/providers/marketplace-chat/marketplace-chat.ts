@@ -3,7 +3,7 @@ import firebase from "firebase";
 import { Events } from 'ionic-angular';
 
 @Injectable()
-export class EventProvider {
+export class MarketplaceChatProvider {
   currentUser: string;
   user2Key: any;
   public eventListRef: firebase.database.Reference;
@@ -38,7 +38,7 @@ export class EventProvider {
     });
   }
 
-  getEventList() {
+  getmarketplacechat() {
     let temp;
     this.user2 = "XVeqVcrUsRgfcoRGlrIKKO43Px23";
     if (firebase.auth().currentUser.uid == this.user2)

@@ -68,7 +68,7 @@ export class HomePage {
     this.navCtrl.push("EventCreatePage");
   }
   goToList(): void {
-    this.navCtrl.push("EventListPage");
+    this.navCtrl.push("marketplacechatPage");
   }
   goToPostCreate(): void {
     this.navCtrl.push("PostCreatePage");

@@ -6,16 +6,16 @@ import { Pro } from '@ionic/pro';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { EventListPage } from '../pages/event-list/event-list';
+import { marketplacechatPage } from '../pages/marketplace-chat/marketplace-chat';
 import { ListPage } from '../pages/list/list';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AuthProvider } from '../providers/auth/auth';
-import { EventProvider } from '../providers/event/event';
+import { MarketplaceChatProvider } from '../providers/marketplace-chat/marketplace-chat';
 import { ProfileProvider } from '../providers/profile/profile';
 
-import { EventListPageModule} from '../pages/event-list/event-list.module';
+import { MarketplaceChatPageModule} from '../pages/marketplace-chat/marketplace-chat.module';
 import { ProfilePageModule} from '../pages/profile/profile.module';
 import { PreloaderProvider } from '../providers/preloader/preloader';
 import { MarketplaceProvider } from '../providers/marketplace/marketplace';
@@ -55,14 +55,14 @@ export class MyErrorHandler implements ErrorHandler {
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    EventListPageModule,
+    MarketplaceChatPageModule,
     ProfilePageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     HomePage,
-    EventListPage,
+    marketplacechatPage,
     ListPage,
   ],
   providers: [
@@ -70,7 +70,7 @@ export class MyErrorHandler implements ErrorHandler {
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,
-    EventProvider,
+    MarketplaceChatProvider,
     ProfileProvider,
     Camera,
     PreloaderProvider,

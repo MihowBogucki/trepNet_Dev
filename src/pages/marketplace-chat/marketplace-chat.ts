@@ -5,12 +5,12 @@ import firebase from "firebase";
 
 @IonicPage()
 @Component({
-  selector: "page-event-list",
-  templateUrl: "event-list.html"
+  selector: "page-marketplace-chat",
+  templateUrl: "marketplace-chat.html"
 })
-export class EventListPage {
+export class marketplacechatPage {
   currentUser: string;
-  public eventList: Array<any>;
+  public marketplacechat: Array<any>;
   @ViewChild('content') content: Content;
   user2: any;
   displayName: any;
@@ -68,11 +68,11 @@ export class EventListPage {
   }
 
   ionViewDidLoad() {
-    this.eventProvider.getEventList();
-    // this.eventProvider.getEventList().on("value", eventListSnapshot => {
-    //   this.eventList = [];
-    //   eventListSnapshot.forEach(snap => {
-    //     this.eventList.push({
+    this.eventProvider.getmarketplacechat();
+    // this.eventProvider.getmarketplacechat().on("value", marketplacechatSnapshot => {
+    //   this.marketplacechat = [];
+    //   marketplacechatSnapshot.forEach(snap => {
+    //     this.marketplacechat.push({
     //       id: snap.key,
     //       name: snap.val().name,
     //       price: snap.val().price,
