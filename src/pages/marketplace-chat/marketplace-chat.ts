@@ -100,7 +100,6 @@ export class MarketplaceChatPage {
           icon: 'information-circle',
           handler: () => {
             console.log('info clicked');
-            alert("info clicked!");
           }
         },
         {
@@ -109,7 +108,6 @@ export class MarketplaceChatPage {
           icon: 'checkmark-circle',
           handler: () => {
             console.log('Accept clicked');
-            alert("Accept clicked!");
           }
         },
         {
@@ -125,7 +123,6 @@ export class MarketplaceChatPage {
           icon: 'git-compare',
           handler: () => {
             console.log('Counter offer');
-            alert("Counter offer clicked!");
           }
         },
         {

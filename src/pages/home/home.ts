@@ -10,19 +10,20 @@ import firebase from "firebase";
 })
 
 export class HomePage {
+  groups: Array<any>;
   public items: any[] = [];
   @ViewChild(Content) content: Content
   public marketPlaceList: Array<any>;
 
   constructor(public navCtrl: NavController,
-              public marketplaceProvider: MarketplaceProvider,
-              public preloaderProvider: PreloaderProvider
-            ) {
-              setTimeout(() => {
-                for (let i = 0; i < 100; i++) {
-                  this.items[i] = i
-                }
-              }, 300)
+    public marketplaceProvider: MarketplaceProvider,
+    public preloaderProvider: PreloaderProvider
+  ) {
+    setTimeout(() => {
+      for (let i = 0; i < 100; i++) {
+        this.items[i] = i
+      }
+    }, 300)
 
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
@@ -41,6 +42,42 @@ export class HomePage {
                 title: snap.val().title,
                 description: snap.val().description,
                 date: snap.val().date
+              // var date = new Date();
+
+              // date; //# => Fri Apr 01 2011 11:14:50 GMT+0200 (CEST)
+
+              // date.setDate(date.getDate() - 1);
+
+              // date; //# => Thu Mar 31 2011 11:14:50 GMT+0200 (CEST)
+              // if (snap.val().date > date)
+              //   this.marketPlaceList.push({
+              //     groupName: "Today",
+              //     marketPlaceList: [{
+              //       id: snap.key,
+              //       firstName: snap.val().firstName,
+              //       profilePicture: snap.val().profilePicture,
+              //       postType: snap.val().postType,
+              //       category: snap.val().category,
+              //       title: snap.val().title,
+              //       description: snap.val().description,
+              //       date: snap.val().date
+              //     }
+              //     ]
+              //   })
+              // else
+              //   this.groups.push({
+              //     groupName: "Yesterday",
+              //     marketPlaceList: [{
+              //       id: snap.key,
+              //       firstName: snap.val().firstName,
+              //       profilePicture: snap.val().profilePicture,
+              //       postType: snap.val().postType,
+              //       category: snap.val().category,
+              //       title: snap.val().title,
+              //       description: snap.val().description,
+              //       date: snap.val().date
+              //     }
+              //     ]
               });
               return false;
             });
@@ -54,7 +91,7 @@ export class HomePage {
     });
   }
 
-  callFunction(){
+  callFunction() {
     this.content.scrollToBottom(0)
   }
 
