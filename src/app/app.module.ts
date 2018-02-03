@@ -6,19 +6,22 @@ import { Pro } from '@ionic/pro';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { marketplacechatPage } from '../pages/marketplace-chat/marketplace-chat';
-import { ListPage } from '../pages/list/list';
+import { MarketplaceChatPage } from '../pages/marketplace-chat/marketplace-chat';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { AuthProvider } from '../providers/auth/auth';
-import { MarketplaceChatProvider } from '../providers/marketplace-chat/marketplace-chat';
-import { ProfileProvider } from '../providers/profile/profile';
 
 import { MarketplaceChatPageModule} from '../pages/marketplace-chat/marketplace-chat.module';
 import { ProfilePageModule} from '../pages/profile/profile.module';
+import { DirectoryPageModule} from '../pages/directory/directory.module';
+
 import { PreloaderProvider } from '../providers/preloader/preloader';
 import { MarketplaceProvider } from '../providers/marketplace/marketplace';
+import { AuthProvider } from '../providers/auth/auth';
+import { MarketplaceChatProvider } from '../providers/marketplace-chat/marketplace-chat';
+import { ProfileProvider } from '../providers/profile/profile';
+import { DirectoryProvider } from '../providers/directory/directory';
+
 
 
 const IonicPro = Pro.init('5275f5d3', {
@@ -50,20 +53,19 @@ export class MyErrorHandler implements ErrorHandler {
   declarations: [
     MyApp,
     HomePage,
-    ListPage,
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     MarketplaceChatPageModule,
-    ProfilePageModule
+    ProfilePageModule,
+    DirectoryPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     HomePage,
-    marketplacechatPage,
-    ListPage,
+    MarketplaceChatPage,
   ],
   providers: [
     StatusBar,
@@ -76,7 +78,8 @@ export class MyErrorHandler implements ErrorHandler {
     PreloaderProvider,
     MarketplaceProvider,
     IonicErrorHandler,
-    [{ provide: ErrorHandler, useClass: MyErrorHandler }]
+    [{ provide: ErrorHandler, useClass: MyErrorHandler }],
+    DirectoryProvider
   ]
 })
 export class AppModule {}

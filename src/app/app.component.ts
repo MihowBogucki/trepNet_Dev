@@ -9,8 +9,8 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireModule } from 'angularfire2';
 
 import { HomePage } from '../pages/home/home';
-import { marketplacechatPage } from '../pages/marketplace-chat/marketplace-chat';
-import { ListPage } from '../pages/list/list';
+import { MarketplaceChatPage } from '../pages/marketplace-chat/marketplace-chat';
+import { DirectoryPage } from '../pages/directory/directory';
 import { ProfilePage } from '../pages/profile/profile';
 
 @Component({
@@ -31,8 +31,8 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Marketplace', component: HomePage },
-      { title: 'Chat', component: marketplacechatPage },
-      { title: 'Directory', component: ListPage },
+      { title: 'Chat', component: MarketplaceChatPage },
+      { title: 'Directory', component: DirectoryPage },
       { title: 'Profile', component: ProfilePage },
     ];
 

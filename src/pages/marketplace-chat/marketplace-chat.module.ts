@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { marketplacechatPage } from './marketplace-chat';
+import { MarketplaceChatPage } from './marketplace-chat';
 
 @NgModule({
   declarations: [
-    marketplacechatPage,
+    MarketplaceChatPage,
   ],
   imports: [
-    IonicPageModule.forChild(marketplacechatPage),
+    IonicPageModule.forChild(MarketplaceChatPage),
   ],
 })
 export class MarketplaceChatPageModule {}

@@ -48,7 +48,7 @@ export class ProfilePage {
       });
     } catch (error) {
       console.log("Profile data error")
-      console.log("ERROR -> " + JSON.stringify(error.message));
+      console.log("ERROR -> " + error.message);
     }
     
   }

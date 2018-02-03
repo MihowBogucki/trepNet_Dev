@@ -1,6 +1,6 @@
 import { Component, NgZone, ViewChild } from "@angular/core";
-import { IonicPage, NavController, Events, Content, Platform, ActionSheetController } from "ionic-angular";
-import { EventProvider } from "../../providers/event/event";
+import { NavController, Events, Content, Platform, ActionSheetController } from "ionic-angular";
+import { MarketplaceChatProvider } from "../../providers/marketplace-chat/marketplace-chat";
 import firebase from "firebase";
 
 @IonicPage()
@@ -8,7 +8,7 @@ import firebase from "firebase";
   selector: "page-marketplace-chat",
   templateUrl: "marketplace-chat.html"
 })
-export class marketplacechatPage {
+export class MarketplaceChatPage {
   currentUser: string;
   public marketplacechat: Array<any>;
   @ViewChild('content') content: Content;
@@ -21,7 +21,7 @@ export class marketplacechatPage {
   imgornot;
   constructor(
     public navCtrl: NavController,
-    public eventProvider: EventProvider,
+    public marketplaceChatProvider: MarketplaceChatProvider,
     public events: Events,
     public zone: NgZone,
     public platform: Platform,
@@ -40,7 +40,7 @@ export class marketplacechatPage {
 
 
       this.zone.run(() => {
-        this.allmessages = this.eventProvider.messages;
+        this.allmessages = this.marketplaceChatProvider.messages;
         this.currentUser = firebase.auth().currentUser.uid;
         // for (var key in this.allmessages) {
         //   if (this.allmessages[key].message.substring(0, 4) == 'http')
@@ -61,14 +61,14 @@ export class marketplacechatPage {
   }
 
   addmessage() {
-    this.eventProvider.addnewmessage(this.newmessage).then(() => {
+    this.marketplaceChatProvider.addnewmessage(this.newmessage).then(() => {
       this.content.scrollToBottom();
       this.newmessage = '';
     })
   }
 
   ionViewDidLoad() {
-    this.eventProvider.getmarketplacechat();
+    this.marketplaceChatProvider.getmarketplacechat();
     // this.eventProvider.getmarketplacechat().on("value", marketplacechatSnapshot => {
     //   this.marketplacechat = [];
     //   marketplacechatSnapshot.forEach(snap => {

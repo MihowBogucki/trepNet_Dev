@@ -1,0 +1,25 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+        <ion-title>
+            Directory
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-list>
+        <button ion-item *ngFor="let item of directoryList">
+      <!-- <ion-icon [name]="item.profilePicture" item-start></ion-icon> -->
+      <ion-avatar item-start>
+            <img src={{item.profilePicture}}>
+        </ion-avatar>
+      {{item.firstName}} {{item.lastName}}
+      <div class="item-note" item-end>
+        {{item.profession}}
+      </div>
+    </button>
+    </ion-list>
+</ion-content>

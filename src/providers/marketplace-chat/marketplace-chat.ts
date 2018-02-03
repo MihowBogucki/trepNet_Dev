@@ -6,13 +6,13 @@ import { Events } from 'ionic-angular';
 export class MarketplaceChatProvider {
   currentUser: string;
   user2Key: any;
-  public eventListRef: firebase.database.Reference;
+  public marketplaceChatListRef: firebase.database.Reference;
   user2: any;
   messages = [];
   constructor(public events: Events) {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        this.eventListRef = firebase.database().ref(`/marketplaceChat/`);
+        this.marketplaceChatListRef = firebase.database().ref(`/marketplaceChat/`);
       }
     });
   }
@@ -29,7 +29,7 @@ export class MarketplaceChatProvider {
     eventPrice: number,
     eventCost: number
   ): firebase.database.ThenableReference {
-    return this.eventListRef.push({
+    return this.marketplaceChatListRef.push({
       name: eventName,
       date: eventDate,
       price: eventPrice * 1,
@@ -46,7 +46,7 @@ export class MarketplaceChatProvider {
 
       this.currentUser = firebase.auth().currentUser.uid;
 
-    this.eventListRef.child(firebase.auth().currentUser.uid).child(this.user2).on('value', (snapshot) => {
+    this.marketplaceChatListRef.child(firebase.auth().currentUser.uid).child(this.user2).on('value', (snapshot) => {
       this.messages = [];
       temp = snapshot.val();
       for (var temKey in temp) {
@@ -64,13 +64,13 @@ export class MarketplaceChatProvider {
     if (this.user2) {
       try {
         var promise = new Promise((resolve, reject) => {
-          console.log(this.eventListRef.child(firebase.auth().currentUser.uid).child(this.user2));
-          this.eventListRef.child(firebase.auth().currentUser.uid).child(this.user2).push({
+          console.log(this.marketplaceChatListRef.child(firebase.auth().currentUser.uid).child(this.user2));
+          this.marketplaceChatListRef.child(firebase.auth().currentUser.uid).child(this.user2).push({
             sentby: firebase.auth().currentUser.uid,
             message: msg,
             timestamp: firebase.database.ServerValue.TIMESTAMP
           }).then(() => {
-            this.eventListRef.child(this.user2).child(firebase.auth().currentUser.uid).push({
+            this.marketplaceChatListRef.child(this.user2).child(firebase.auth().currentUser.uid).push({
               sentby: firebase.auth().currentUser.uid,
               message: msg,
               timestamp: firebase.database.ServerValue.TIMESTAMP
@@ -91,7 +91,7 @@ export class MarketplaceChatProvider {
   }
 
   getEventDetail(eventId: string): firebase.database.Reference {
-    return this.eventListRef.child(eventId);
+    return this.marketplaceChatListRef.child(eventId);
   }
 
   addGuest(
@@ -100,11 +100,11 @@ export class MarketplaceChatProvider {
     eventPrice: number,
     guestPicture: string = null
   ): PromiseLike<any> {
-    return this.eventListRef
+    return this.marketplaceChatListRef
       .child(`${eventId}/guestList`)
       .push({ guestName })
       .then(newGuest => {
-        this.eventListRef.child(eventId).transaction(event => {
+        this.marketplaceChatListRef.child(eventId).transaction(event => {
           event.revenue += eventPrice;
           return event;
         });
@@ -114,7 +114,7 @@ export class MarketplaceChatProvider {
             .ref(`/guestProfile/${newGuest.key}/profilePicture.png`)
             .putString(guestPicture, 'base64', { contentType: 'image/png' })
             .then(savedPicture => {
-              this.eventListRef
+              this.marketplaceChatListRef
                 .child(`${eventId}/guestList/${newGuest.key}/profilePicture`)
                 .set(savedPicture.downloadURL);
             });
