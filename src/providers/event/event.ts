@@ -12,15 +12,11 @@ export class EventProvider {
   constructor(public events: Events) {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        //this.eventListRef = firebase.database().ref(`/userProfile/${user.uid}/marketplaceChat`);
         this.eventListRef = firebase.database().ref(`/marketplaceChat/`);
       }
     });
   }
 
-  // initializeuser2(user2) {
-  //   this.user2 = user2;
-  // }
   initializeuser2(user2) {
     this.user2 = "XVeqVcrUsRgfcoRGlrIKKO43Px23";
     if (firebase.auth().currentUser.uid == this.user2)
@@ -64,7 +60,7 @@ export class EventProvider {
     this.user2 = "XVeqVcrUsRgfcoRGlrIKKO43Px23";
     if (firebase.auth().currentUser.uid == this.user2)
       this.user2 = "6UICA5yT1IWZKrzLyit0YO4kHZj2";
-      
+
     if (this.user2) {
       try {
         var promise = new Promise((resolve, reject) => {
@@ -93,19 +89,6 @@ export class EventProvider {
 
     }
   }
-
-  // getbuddymessages() {
-
-  //   let temp;
-  //   this.firebuddychats.child(firebase.auth().currentUser.uid).child(this.buddy.uid).on('value', (snapshot) => {
-  //     this.buddymessages = [];
-  //     temp = snapshot.val();
-  //     for (var tempkey in temp) {
-  //       this.buddymessages.push(temp[tempkey]);
-  //     }
-  //     this.events.publish('newmessage');
-  //   })
-  // }
 
   getEventDetail(eventId: string): firebase.database.Reference {
     return this.eventListRef.child(eventId);

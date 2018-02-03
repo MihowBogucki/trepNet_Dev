@@ -1,5 +1,5 @@
 import { Component, NgZone, ViewChild } from "@angular/core";
-import { IonicPage, NavController, Events, Content } from "ionic-angular";
+import { IonicPage, NavController, Events, Content, Platform, ActionSheetController } from "ionic-angular";
 import { EventProvider } from "../../providers/event/event";
 import firebase from "firebase";
 
@@ -23,7 +23,9 @@ export class EventListPage {
     public navCtrl: NavController,
     public eventProvider: EventProvider,
     public events: Events,
-    public zone: NgZone
+    public zone: NgZone,
+    public platform: Platform,
+    public actionsheetCtrl: ActionSheetController
   ) { 
     //this.photoURL = firebase.auth().currentUser.photoURL;
     this.photoURL = "https://firebasestorage.googleapis.com/v0/b/trepnet-58387.appspot.com/o/userProfile%2F6UICA5yT1IWZKrzLyit0YO4kHZj2%2FuserPhoto?alt=media&token=059253f0-e18b-4701-a9c7-127ad7c8cc21";
@@ -88,4 +90,53 @@ export class EventListPage {
     this.navCtrl.push("EventCreatePage");
   }
   
+  openMenu() {
+    let actionSheet = this.actionsheetCtrl.create({
+      title: 'Actions',
+      cssClass: 'action-sheets-basic-page',
+      buttons: [
+        {
+          text: 'Offer Info',
+          icon: 'information-circle',
+          handler: () => {
+            console.log('info clicked');
+            alert("info clicked!");
+          }
+        },
+        {
+          text: 'Accept',
+          role: 'destructive',
+          icon: 'checkmark-circle',
+          handler: () => {
+            console.log('Accept clicked');
+            alert("Accept clicked!");
+          }
+        },
+        {
+          text: 'Reject',
+          icon: 'close-circle',
+          handler: () => {
+            console.log('Reject clicked');
+            alert("Reject clicked!");
+          }
+        },
+        {
+          text: 'Counter Offer',
+          icon: 'git-compare',
+          handler: () => {
+            console.log('Counter offer');
+            alert("Counter offer clicked!");
+          }
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel', // will always sort to be on the bottom
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    actionSheet.present();
+  }
 }
