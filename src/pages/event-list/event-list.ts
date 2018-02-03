@@ -9,6 +9,7 @@ import firebase from "firebase";
   templateUrl: "event-list.html"
 })
 export class EventListPage {
+  currentUser: string;
   public eventList: Array<any>;
   @ViewChild('content') content: Content;
   user2: any;
@@ -34,14 +35,17 @@ export class EventListPage {
     this.events.subscribe('newmessage', () => {
       this.allmessages = [];
       this.imgornot = [];
+
+
       this.zone.run(() => {
         this.allmessages = this.eventProvider.messages;
-        for (var key in this.allmessages) {
-          if (this.allmessages[key].message.substring(0, 4) == 'http')
-            this.imgornot.push(true);
-          else
-            this.imgornot.push(false);
-        }
+        this.currentUser = firebase.auth().currentUser.uid;
+        // for (var key in this.allmessages) {
+        //   if (this.allmessages[key].message.substring(0, 4) == 'http')
+        //     this.imgornot.push(true);
+        //   else
+        //     this.imgornot.push(false);        
+        // }
       })
       
       

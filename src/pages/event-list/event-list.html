@@ -44,25 +44,19 @@
     <div class="chatwindow">
         <ion-list no-lines>
             <ion-item *ngFor="let item of allmessages; let i = index" text-wrap>
-                <!-- <ion-avatar item-left *ngIf="item.sentby === null"> -->
-                <ion-avatar item-left>
+                <ion-avatar item-left *ngIf="item.sentby != currentUser">
                     <img src="{{photoURLUser2}}">
                 </ion-avatar>
-                <!-- <div class="bubble me" *ngIf="item.sentby === null"> -->
-                <div class="bubble me">
-                    <h3 *ngIf="!imgornot[i]">{{item.message}}</h3>
-                    <img src="{{item.message}}" *ngIf="imgornot[i]">
+                <div class="bubble me" *ngIf="item.sentby != currentUser">
+                    <h3>{{item.message}}</h3>
                 </div>
-                <!-- <ion-avatar item-right *ngIf="item.sentby != null"> -->
-                <ion-avatar item-right>
+                <ion-avatar item-right *ngIf="item.sentby === currentUser">
                     <img src="{{photoURL}}">
                 </ion-avatar>
-                <!-- <div class="bubble you" *ngIf="item.sentby != null"> -->
-                <div class="bubble you">
-                    <!-- <h3 *ngIf="!imgornot[i]">{{item.message}}</h3> -->
+                <div class="bubble you" *ngIf="item.sentby === currentUser">
                     <h3>{{item.message}}</h3>
-                    <img src="{{item.message}}" *ngIf="imgornot[i]">
                 </div>
+
             </ion-item>
         </ion-list>
     </div>
