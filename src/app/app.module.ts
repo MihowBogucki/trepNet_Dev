@@ -1,3 +1,4 @@
+
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule, Injectable, Injector } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -61,13 +62,13 @@ export class MyErrorHandler implements ErrorHandler {
     IonicModule.forRoot(MyApp),
     MarketplaceChatPageModule,
     ProfilePageModule,
-    DirectoryPageModule
+    DirectoryPageModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     HomePage,
-    MarketplaceChatPage,
+    MarketplaceChatPage
   ],
   providers: [
     StatusBar,

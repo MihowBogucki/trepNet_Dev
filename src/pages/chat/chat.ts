@@ -35,6 +35,7 @@ export class ChatPage {currentUser: string;
     this.photoURLUser2 = "https://firebasestorage.googleapis.com/v0/b/trepnet-58387.appspot.com/o/userProfile%2FXVeqVcrUsRgfcoRGlrIKKO43Px23%2FuserPhoto?alt=media&token=ed81a278-63ab-43d2-b4a8-0d233dce77db";
    
     this.scrollto();
+
     this.events.subscribe('newmessage', () => {
       this.allmessages = [];
       this.imgornot = [];
@@ -70,18 +71,6 @@ export class ChatPage {currentUser: string;
 
   ionViewDidLoad() {
     this.chatProvider.getmarketplacechat();
-    // this.eventProvider.getmarketplacechat().on("value", marketplacechatSnapshot => {
-    //   this.marketplacechat = [];
-    //   marketplacechatSnapshot.forEach(snap => {
-    //     this.marketplacechat.push({
-    //       id: snap.key,
-    //       name: snap.val().name,
-    //       price: snap.val().price,
-    //       date: snap.val().date
-    //     });
-    //     return false;
-    //   });
-    // });
   }
 
   goToEventDetail(eventId):void {

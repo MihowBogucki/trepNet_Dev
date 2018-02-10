@@ -2,12 +2,6 @@ import { Injectable } from '@angular/core';
 import { LoadingController } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 
-/*
-  Generated class for the Preloader provider.
-
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular DI.
-*/
 @Injectable()
 export class PreloaderProvider {
 
@@ -25,8 +19,6 @@ export class PreloaderProvider {
 
     this.loading.present();
   }
-
-
 
   hidePreloader(): void {
     this.loading.dismiss();

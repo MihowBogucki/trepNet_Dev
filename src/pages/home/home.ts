@@ -110,5 +110,4 @@ export class HomePage {
   goToPostCreate(): void {
     this.navCtrl.push("PostCreatePage");
   }
-
 }

@@ -1,6 +1,6 @@
 import { RequestsProvider } from './../requests/requests';
-import { Component, Injectable } from '@angular/core';
-import { IonicPage, NavController, NavParams, Events, AlertController } from 'ionic-angular';
+import { Injectable } from '@angular/core';
+import { NavController, NavParams, Events, AlertController } from 'ionic-angular';
 import { ChatProvider } from '../../providers/chat/chat';
 
 @Injectable()

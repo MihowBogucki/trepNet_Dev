@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Events, AlertController } from 'ionic-angular';
+import { NavController, NavParams, Events, AlertController } from 'ionic-angular';
 import { RequestsProvider } from '../../providers/requests/requests';
 import { ChatProvider } from '../../providers/chat/chat';
 
-@IonicPage()
 @Component({
   selector: "page-marketplace-chat",
   templateUrl: "marketplace-chat.html"

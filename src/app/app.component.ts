@@ -5,7 +5,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import firebase from 'firebase';
 import { firebaseConfig } from './credentials';
-import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireModule } from 'angularfire2';
 
 import { HomePage } from '../pages/home/home';
