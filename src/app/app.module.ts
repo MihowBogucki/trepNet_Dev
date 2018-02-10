@@ -21,6 +21,8 @@ import { AuthProvider } from '../providers/auth/auth';
 import { MarketplaceChatProvider } from '../providers/marketplace-chat/marketplace-chat';
 import { ProfileProvider } from '../providers/profile/profile';
 import { DirectoryProvider } from '../providers/directory/directory';
+import { ChatProvider } from '../providers/chat/chat';
+import { RequestsProvider } from '../providers/requests/requests';
 
 
 
@@ -79,7 +81,9 @@ export class MyErrorHandler implements ErrorHandler {
     MarketplaceProvider,
     IonicErrorHandler,
     [{ provide: ErrorHandler, useClass: MyErrorHandler }],
-    DirectoryProvider
+    DirectoryProvider,
+    ChatProvider,
+    RequestsProvider
   ]
 })
 export class AppModule {}

@@ -1,0 +1,55 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>{{displayName}}</ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only>
+            <ion-icon name="call" color="primary"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-buttons end>
+            <button ion-button icon-only>
+            <ion-icon name="attach" color="danger"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="openMenu()">
+            <ion-icon name="more" color="primary"></ion-icon>
+          </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content #content>
+    <div class="chatwindow">
+        <ion-list no-lines>
+            <ion-item *ngFor="let item of allmessages; let i = index" text-wrap>
+                <ion-avatar item-left *ngIf="item.sentby != currentUser">
+                    <img src="{{photoURLUser2}}">
+                </ion-avatar>
+                <div class="bubble me" *ngIf="item.sentby != currentUser">
+                    <h3>{{item.message}}</h3>
+                </div>
+                <ion-avatar item-right *ngIf="item.sentby === currentUser">
+                    <img src="{{photoURL}}">
+                </ion-avatar>
+                <div class="bubble you" *ngIf="item.sentby === currentUser">
+                    <h3>{{item.message}}</h3>
+                </div>
+
+            </ion-item>
+        </ion-list>
+    </div>
+</ion-content>
+<ion-footer ion-fixed>
+    <ion-toolbar class="no-border" color="white">
+        <ion-input [(ngModel)]="newmessage" placeholder="Write your message ..."></ion-input>
+        <ion-buttons end>
+            <button ion-button (click)="addmessage()">
+          <ion-icon name="send" color="primary"></ion-icon>
+        </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-footer>

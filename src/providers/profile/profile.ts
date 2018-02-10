@@ -3,15 +3,17 @@ import firebase from 'firebase';
 
 @Injectable()
 export class ProfileProvider {
-
+  public users: firebase.database.Reference;
   public userProfile: firebase.database.Reference;
   public currentUser: firebase.User;
+
 
   constructor() {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.currentUser = user;
         this.userProfile = firebase.database().ref(`/userProfile/${user.uid}`)
+        this.users = firebase.database().ref('/userProfile');
       }
     });
   }
@@ -53,6 +55,7 @@ export class ProfileProvider {
         console.error(error);
       });
   }
+
   updatePassword(newPassword: string, oldPassword: string): Promise<any> {
     const credential: firebase.auth.AuthCredential = firebase.auth
       .EmailAuthProvider.credential(
@@ -69,5 +72,21 @@ export class ProfileProvider {
       .catch(error => {
         console.error(error);
       });
+  }
+
+  getallusers() {
+    var promise = new Promise((resolve, reject) => {
+      this.users.orderByChild('uid').once('value', (snapshot) => {
+        let userdata = snapshot.val();
+        let temparr = [];
+        for (var key in userdata) {
+          temparr.push(userdata[key]);
+        }
+        resolve(temparr);
+      }).catch((err) => {
+        reject(err);
+      })
+    })
+    return promise;
   }
 }
