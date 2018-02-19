@@ -8,7 +8,7 @@ import { connreq } from '../../models/interfaces/request';
 
 @Injectable()
 export class RequestsProvider {
-  firereq = firebase.database().ref('/requests/');
+  firereq = firebase.database().ref('/marketplaceRequests/');
   firefriends = firebase.database().ref('/friends/');
   
   userdetails;

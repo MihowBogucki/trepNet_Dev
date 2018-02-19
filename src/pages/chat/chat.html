@@ -3,7 +3,7 @@
         <button ion-button menuToggle>
             <ion-icon name="menu"></ion-icon>
         </button>
-        <ion-title>{{displayName}}</ion-title>
+        <ion-title>{{buddy?.firstName}}</ion-title>
         <ion-buttons end>
             <button ion-button icon-only>
             <ion-icon name="call" color="primary"></ion-icon>
@@ -27,7 +27,7 @@
         <ion-list no-lines>
             <ion-item *ngFor="let item of allmessages; let i = index" text-wrap>
                 <ion-avatar item-left *ngIf="item.sentby != currentUser">
-                    <img src="{{photoURLUser2}}">
+                    <img src="{{buddy?.profilePicture}}">
                 </ion-avatar>
                 <div class="bubble me" *ngIf="item.sentby != currentUser">
                     <h3>{{item.message}}</h3>

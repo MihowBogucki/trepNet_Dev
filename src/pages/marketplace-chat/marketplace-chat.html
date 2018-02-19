@@ -37,7 +37,7 @@
             </ion-item-options>
         </ion-item-sliding>
         <ion-list-header>
-            Friends
+            In Progress
         </ion-list-header>
         <ion-item *ngFor="let item of myfriends" (click)="buddychat(item)">
             <ion-avatar item-left>
@@ -45,5 +45,10 @@
             </ion-avatar>
             <h3>{{item.firstName}}</h3>
         </ion-item>
+
+        <ion-list-header>
+            Completed
+        </ion-list-header>
+
     </ion-list>
 </ion-content>

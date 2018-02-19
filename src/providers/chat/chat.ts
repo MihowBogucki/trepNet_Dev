@@ -1,13 +1,16 @@
 import { Injectable } from "@angular/core";
 import firebase from "firebase";
 import { Events } from 'ionic-angular';
+import { ProfileProvider } from "../profile/profile";
 
 @Injectable()
 export class ChatProvider {
-  currentUser: string;
-  user2Key: any;
+  phoneNo: any;
+  profilePicture: any;
   public marketplaceChatListRef: firebase.database.Reference;
-  user2: any;
+  public profileProvider: ProfileProvider;
+  photoURL: string;
+  currentUser: string;
   buddy: any;
   messages = [];
   constructor(public events: Events) {
@@ -18,85 +21,58 @@ export class ChatProvider {
     });
   }
 
-  initializeuser2(user2) {
-    this.user2 = "XVeqVcrUsRgfcoRGlrIKKO43Px23";
-    if (firebase.auth().currentUser.uid == this.user2)
-      this.user2 = "6UICA5yT1IWZKrzLyit0YO4kHZj2";
-  }
-  
   initializebuddy(buddy) {
     this.buddy = buddy;
   }
 
-  createEvent(
-    eventName: string,
-    eventDate: string,
-    eventPrice: number,
-    eventCost: number
-  ): firebase.database.ThenableReference {
-    return this.marketplaceChatListRef.push({
-      name: eventName,
-      date: eventDate,
-      price: eventPrice * 1,
-      cost: eventCost * 1,
-      revenue: eventCost * -1
-    });
-  }
-
   getmarketplacechat() {
     let temp;
-    this.user2 = "XVeqVcrUsRgfcoRGlrIKKO43Px23";
-    if (firebase.auth().currentUser.uid == this.user2)
-      this.user2 = "6UICA5yT1IWZKrzLyit0YO4kHZj2";
+    //this.user2 = "XVeqVcrUsRgfcoRGlrIKKO43Px23";
+    // if (firebase.auth().currentUser.uid == this.user2)
+    //   this.user2 = "6UICA5yT1IWZKrzLyit0YO4kHZj2";
 
-      this.currentUser = firebase.auth().currentUser.uid;
+    this.currentUser = firebase.auth().currentUser.uid;    
+    // this.profileProvider.getUserProfile().on('value', userProfileSnapshot => {
+    //   this.phoneNo = userProfileSnapshot.val().phoneNo;
+    //   this.profilePicture = userProfileSnapshot.val().profilePicture;
+    // });
+    this.buddy;
 
-    this.marketplaceChatListRef.child(firebase.auth().currentUser.uid).child(this.user2).on('value', (snapshot) => {
+    this.marketplaceChatListRef.child(firebase.auth().currentUser.uid).child(this.buddy.uid).on('value', (snapshot) => {
       this.messages = [];
       temp = snapshot.val();
       for (var temKey in temp) {
         this.messages.push(temp[temKey]);
       }
-      this.events.publish('newmessage');
+      this.events.publish('newmessage', this.buddy);
     })
   }
 
   addnewmessage(msg) {
-    this.user2 = "XVeqVcrUsRgfcoRGlrIKKO43Px23";
-    if (firebase.auth().currentUser.uid == this.user2)
-      this.user2 = "6UICA5yT1IWZKrzLyit0YO4kHZj2";
-
-    if (this.user2) {
-      try {
-        var promise = new Promise((resolve, reject) => {
-          console.log(this.marketplaceChatListRef.child(firebase.auth().currentUser.uid).child(this.user2));
-          this.marketplaceChatListRef.child(firebase.auth().currentUser.uid).child(this.user2).push({
+    try {
+      var promise = new Promise((resolve, reject) => {
+        console.log(this.marketplaceChatListRef.child(firebase.auth().currentUser.uid).child(this.buddy.uid));
+        this.marketplaceChatListRef.child(firebase.auth().currentUser.uid).child(this.buddy.uid).push({
+          sentby: firebase.auth().currentUser.uid,
+          message: msg,
+          timestamp: firebase.database.ServerValue.TIMESTAMP
+        }).then(() => {
+          this.marketplaceChatListRef.child(this.buddy.uid).child(firebase.auth().currentUser.uid).push({
             sentby: firebase.auth().currentUser.uid,
             message: msg,
             timestamp: firebase.database.ServerValue.TIMESTAMP
           }).then(() => {
-            this.marketplaceChatListRef.child(this.user2).child(firebase.auth().currentUser.uid).push({
-              sentby: firebase.auth().currentUser.uid,
-              message: msg,
-              timestamp: firebase.database.ServerValue.TIMESTAMP
-            }).then(() => {
-              resolve(true);
-            })
-            //   .catch((err) => {
-            //     reject(err);
-            // })
+            resolve(true);
           })
+          //   .catch((err) => {
+          //     reject(err);
+          // })
         })
-        return promise;
-      } catch (error) {
-        console.log(error.message);
-      }
-
+      })
+      return promise;
+    } catch (error) {
+      console.log(error.message);
     }
-  }
-
-  getEventDetail(eventId: string): firebase.database.Reference {
-    return this.marketplaceChatListRef.child(eventId);
   }
 
   addGuest(
