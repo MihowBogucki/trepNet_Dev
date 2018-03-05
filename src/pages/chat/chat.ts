@@ -1,6 +1,7 @@
 import { Component, NgZone, ViewChild } from '@angular/core';
 import { NavController, Events, Content, Platform, ActionSheetController, IonicPage } from 'ionic-angular';
 import firebase from "firebase";
+import { ProfileProvider } from '../../providers/profile/profile';
 
 import { ChatProvider } from "../../providers/chat/chat";
 
@@ -13,7 +14,7 @@ import { ChatProvider } from "../../providers/chat/chat";
 export class ChatPage {
 
   buddy: any;
-currentUser: string;
+  currentUser: string;
   public marketplacechat: Array<any>;
   @ViewChild('content') content: Content;
   user2: any;
@@ -31,11 +32,14 @@ currentUser: string;
     public events: Events,
     public zone: NgZone,
     public platform: Platform,
-    public actionsheetCtrl: ActionSheetController
-  ) { 
-    //this.photoURL = firebase.auth().currentUser.photoURL;
-    //this.photoURL = "https://firebasestorage.googleapis.com/v0/b/trepnet-58387.appspot.com/o/userProfile%2F6UICA5yT1IWZKrzLyit0YO4kHZj2%2FuserPhoto?alt=media&token=059253f0-e18b-4701-a9c7-127ad7c8cc21";
-   
+    public actionsheetCtrl: ActionSheetController,
+    public profileProvider: ProfileProvider
+  ) {
+
+    this.profileProvider.getUserProfile().on('value', userProfileSnapshot => {
+      this.photoURL = userProfileSnapshot.val().profilePicture;
+    });
+
     this.scrollto();
 
     this.events.subscribe('newmessage', () => {
@@ -46,7 +50,7 @@ currentUser: string;
         this.allmessages = this.chatProvider.messages;
         this.buddy = this.chatProvider.buddy;
         this.currentUser = firebase.auth().currentUser.uid;
-        this.photoURL = this.chatProvider.profilePicture;
+        //this.photoURL = this.chatProvider.profilePicture;
         // for (var key in this.allmessages) {
         //   if (this.allmessages[key].message.substring(0, 4) == 'http')
         //     this.imgornot.push(true);
@@ -54,11 +58,11 @@ currentUser: string;
         //     this.imgornot.push(false);        
         // }
       })
-      
-      
+
+
     })
   }
-  
+
   scrollto() {
     setTimeout(() => {
       this.content.scrollToBottom();
@@ -75,7 +79,7 @@ currentUser: string;
   ionViewDidLoad() {
     this.chatProvider.getmarketplacechat();
   }
-  
+
   openMenu() {
     let actionSheet = this.actionsheetCtrl.create({
       title: 'Actions',
