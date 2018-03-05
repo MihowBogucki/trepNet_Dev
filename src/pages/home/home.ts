@@ -110,11 +110,11 @@ export class HomePage {
   goToCreate(): void {
     this.navCtrl.push("EventCreatePage");
   }
-  goToList(): void {
-    this.navCtrl.push("marketplacechatPage");
-  }
   goToPostCreate(): void {
     this.navCtrl.push("PostCreatePage");
+  }
+  goToMarketPlaceChat(): void {
+    this.navCtrl.push("MarketplaceChatPage");
   }
 
 
@@ -126,7 +126,7 @@ export class HomePage {
     else {
       let successalert = this.alertCtrl.create({
         title: 'Request sent',
-        subTitle: 'Your request was sent to ' + recipient.displayName,
+        subTitle: 'Your request was sent to ' + recipient.firstName,
         buttons: ['ok']
       });
     

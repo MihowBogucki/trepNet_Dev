@@ -98,6 +98,7 @@ export class ChatPage {
           icon: 'checkmark-circle',
           handler: () => {
             console.log('Accept clicked');
+            //Change chat status to complete
           }
         },
         {
@@ -106,13 +107,6 @@ export class ChatPage {
           handler: () => {
             console.log('Reject clicked');
             alert("Reject clicked!");
-          }
-        },
-        {
-          text: 'Counter Offer',
-          icon: 'git-compare',
-          handler: () => {
-            console.log('Counter offer');
           }
         },
         {
