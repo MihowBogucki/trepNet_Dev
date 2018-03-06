@@ -24,7 +24,7 @@ export class MarketplaceChatProvider {
     })
     this.events.subscribe('friends', () => {
       this.myfriends = [];
-      this.myfriends = this.requestservice.myfriends; 
+      this.myfriends = this.requestservice.myinteractionsinprogress; 
     })
   }
 

@@ -3,7 +3,7 @@
         <button ion-button menuToggle>
             <ion-icon name="menu"></ion-icon>
         </button>
-        <ion-title>Work In Progress</ion-title>
+        <ion-title>Interactions</ion-title>
         <ion-buttons end>
             <button ion-button icon-only (click)="addbuddy()">
               <ion-icon name="person-add"></ion-icon>
@@ -39,7 +39,7 @@
         <ion-list-header>
             In Progress
         </ion-list-header>
-        <ion-item *ngFor="let item of myfriends" (click)="buddychat(item)">
+        <ion-item *ngFor="let item of myinteractionsinprogress" (click)="buddychat(item)">
             <ion-avatar item-left>
                 <img src={{item.profilePicture}}>
             </ion-avatar>

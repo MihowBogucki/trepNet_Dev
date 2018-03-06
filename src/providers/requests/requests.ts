@@ -12,7 +12,7 @@ export class RequestsProvider {
   firefriends = firebase.database().ref('/friends/');
   
   userdetails;
-  myfriends;
+  myinteractionsinprogress;
   constructor(public userservice: ProfileProvider, public events: Events, public directoryService: DirectoryProvider) {
     
   }
@@ -57,7 +57,7 @@ export class RequestsProvider {
 
   acceptrequest(buddy) {
     var promise = new Promise((resolve, reject) => {
-      this.myfriends = [];
+      this.myinteractionsinprogress = [];
       this.firefriends.child(firebase.auth().currentUser.uid).push({
         uid: buddy.uid
       }).then(() => {
@@ -105,16 +105,16 @@ export class RequestsProvider {
     console.log( this.firefriends.child(firebase.auth().currentUser.uid));
     this.firefriends.child(firebase.auth().currentUser.uid).on('value', (snapshot) => {
       let allfriends = snapshot.val();
-      this.myfriends = [];
+      this.myinteractionsinprogress = [];
       for (var i in allfriends)
         friendsuid.push(allfriends[i].uid);
         
       this.userservice.getallusers().then((users) => {
-        this.myfriends = [];
+        this.myinteractionsinprogress = [];
         for (var j in friendsuid)
           for (var key in users) {
             if (friendsuid[j] === users[key].uid) {
-              this.myfriends.push(users[key]);
+              this.myinteractionsinprogress.push(users[key]);
             }
           }
         this.events.publish('friends');
